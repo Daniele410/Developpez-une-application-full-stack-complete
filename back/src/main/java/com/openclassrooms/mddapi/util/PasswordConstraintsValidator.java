@@ -12,15 +12,14 @@ public class PasswordConstraintsValidator implements ConstraintValidator<Passwor
 
         PasswordValidator passwordValidator = new PasswordValidator(
                 Arrays.asList(
-                        //Length rule. Min 10 max 60 characters
                         new LengthRule(6, 60),
-                        //At least one upper case letter
-                        new UppercaseCharacterRule(1),
-                        //At least one number
-                        new DigitCharacterRule(1),
-                        //At least one special characters
-                        new SpecialCharacterRule(1),
-
+                        // At least one upper case letter
+                        new CharacterRule(EnglishCharacterData.UpperCase, 1),
+                        // At least one number
+                        new CharacterRule(EnglishCharacterData.Digit, 1),
+                        // At least one special character
+                        new CharacterRule(EnglishCharacterData.Special, 1),
+                        // No whitespace allowed
                         new WhitespaceRule()));
 
 
