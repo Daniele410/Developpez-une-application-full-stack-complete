@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.auth;
 
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +27,7 @@ public class AuthenticationController {
     private final UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws Exception {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request) throws Exception {
 
         if (StringUtils.isAnyBlank(request.getName(), request.getEmail(), request.getPassword())) {
             log.error("Fields should not be empty!");
