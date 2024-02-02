@@ -10,19 +10,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from 'src/app/header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatToolbarModule
 ]
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     AuthRoutingModule,
