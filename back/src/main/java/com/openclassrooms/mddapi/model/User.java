@@ -46,9 +46,11 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Topic> topics;
 
     public User(String email, String name, String password) {
         this.email = email;

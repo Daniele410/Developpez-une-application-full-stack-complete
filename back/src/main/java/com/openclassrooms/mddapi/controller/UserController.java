@@ -149,7 +149,7 @@ public class UserController {
             throw new UserNotFoundException("User with id " + id + " not found");
         }
         UserResponseDTO meResponse =
-                new UserResponseDTO(user.get().getId(), user.get().getName(), user.get().getEmail(), user.get().getCreatedAt(), user.get().getUpdatedAt());
+                new UserResponseDTO(user.get());
         return ResponseEntity.ok(meResponse);
     }
 }
