@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -17,11 +17,10 @@ import java.sql.Timestamp;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String description;
-    private int authorId;
-    private int postId;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
-
+    private Long authorId;
+    private Long postId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

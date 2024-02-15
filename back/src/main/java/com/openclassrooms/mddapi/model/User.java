@@ -49,9 +49,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Topic> topics;
-
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;

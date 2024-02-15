@@ -28,7 +28,6 @@ public class UserResponseDTO {
         this.email = user.getEmail();
         this.created_at = user.getCreatedAt();
         this.updated_at = user.getUpdatedAt();
-        this.topic = user.getTopics();
 
     }
 }

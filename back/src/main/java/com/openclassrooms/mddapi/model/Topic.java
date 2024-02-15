@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -29,12 +31,12 @@ public class Topic {
     private String description;
 
     @JsonIgnore
-    @ManyToOne()
+    @OneToMany()
     @JoinTable(
             name = "Subscriptions",
             joinColumns = @JoinColumn(name = "topics_id"),
             inverseJoinColumns = @JoinColumn(name = "users_id")
     )
-    private User user;
+    private List<User> users;
 
 }
