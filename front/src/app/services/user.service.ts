@@ -12,7 +12,16 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getUserById(id: number): Observable<User> {
+  public getUserById(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);
   }
+
+  public delete(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.pathService}/${id}`);
+  }
+
+  public updateMe(data: any) {
+    return this.httpClient.put<User>('/api/user/me', data);
+  }
+
 }
