@@ -1,0 +1,61 @@
+.user-profile {
+    display: flexbox;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+    justify-content: center;
+
+    
+    h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+  
+    .update--valid {
+      color: green;
+      font-weight: bold;
+    }
+  
+    form {
+      margin-bottom: 20px;
+      
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 10px;
+  
+        .input {
+            display: flexbox;
+          width: 100%;
+          
+        }
+      }
+  
+      button[type="submit"] {
+        display: flexbox;
+        
+      }
+    }
+  
+    .logout {
+      margin-top: 10px;
+    }
+  
+    h2 {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  
+      app-topic-card {
+        flex-basis: calc(50% - 10px); // Per avere due card affiancate con uno spazio di 10px tra di esse
+        margin-bottom: 10px;
+      }
+    }
+  }

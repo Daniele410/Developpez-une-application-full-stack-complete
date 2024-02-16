@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<app-header-nav></app-header-nav>
+
+<div class="user-profile">
+    <h1>User Profile</h1>
+    <p *ngIf="updateValid" class="update--valid">Upload profile</p>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="input">
+       
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" [value]="user.name" />
+        <br>
+
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" [value]="user.email" type="email" />
+        
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+    </form>
+  
+    <button button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    <br>
+    <h2>Abonnements</h2>
+    <nav>
+      <app-topic-card *ngFor="let topic of topicsSubcriptions" [topics]="topic"></app-topic-card>
+    </nav>
+</div>
