@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +20,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private Long authorId;
-    private Long postId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @JsonIgnore
+    @OneToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(nullable = false, name = "author_id", referencedColumnName = "id")
+    private User author;
+
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post posts;
 }

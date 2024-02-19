@@ -1,8 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +15,12 @@ import lombok.NoArgsConstructor;
 public class Subscription {
 
     @Id
-    Long users_id;
+    @ManyToOne
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private User user;
 
     @Id
-    Long topics_id;
+    @ManyToOne
+    @JoinColumn(name = "topics_id", referencedColumnName = "id")
+    private Topic topic;
 }

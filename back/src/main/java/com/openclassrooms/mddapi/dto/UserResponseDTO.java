@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ public class UserResponseDTO {
     private String name;
     private String email;
     private List<Topic> topic;
+    @JsonIgnore
+    private User user;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 

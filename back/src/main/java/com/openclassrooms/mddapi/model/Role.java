@@ -1,7 +1,9 @@
 package com.openclassrooms.mddapi.model;
 
-public enum Role {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+public enum Role {
+    @JsonIgnore
     USER,
     ADMIN
 }

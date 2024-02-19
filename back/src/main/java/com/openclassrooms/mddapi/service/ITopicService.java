@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.TopicResponseDTO;
 import com.openclassrooms.mddapi.model.Topic;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public interface ITopicService {
 
     List<Topic> getUserSubscribedTopics();
 
-    void subscribe(long topicsId);
+    Topic createTopic(TopicResponseDTO topicResponseDTO);
+
+    void subscribe(long topicId);
 
     void unsubscribe(long topicsId);
 }

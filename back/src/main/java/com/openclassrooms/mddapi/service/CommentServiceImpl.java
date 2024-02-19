@@ -48,8 +48,7 @@ public class CommentServiceImpl implements ICommentService {
         User user = userService.getUserByEmail(userDetails.getUsername());
         Comment comment = Comment.builder()
                 .description(commentDto.getDescription())
-                .authorId(user.getId())
-                .postId(commentDto.getPostId())
+                .author(user)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
@@ -63,7 +62,7 @@ public class CommentServiceImpl implements ICommentService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
         Comment comment = commentRepository.findById(id).orElseThrow();
-        if (comment.getAuthorId() == user.getId()) {
+        if (comment.getAuthor().getId() == user.getId()) {
             commentRepository.deleteById(id);
             log.info("Comment deleted successfully");
             return "Comment whit id " + id + " deleted successfully";

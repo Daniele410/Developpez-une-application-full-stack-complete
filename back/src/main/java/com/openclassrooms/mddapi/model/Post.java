@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,12 +18,27 @@ import java.sql.Timestamp;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String title;
     private String description;
-    private int authorId;
-    private int topicId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+
+    @JsonIgnore
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    @JoinColumn(nullable = false, name = "author_id", referencedColumnName = "id")
+    private User author;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    @JoinColumn(nullable = false, name = "topic_id", referencedColumnName = "id")
+    private Topic topics;
 
 }

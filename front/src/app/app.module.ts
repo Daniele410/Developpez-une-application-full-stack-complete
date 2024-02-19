@@ -13,14 +13,12 @@ import { NgModule } from '@angular/core';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { AuthModule } from './features/auth/auth.module';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { HeaderNavComponent } from './header-nav/header-nav.component';
-import { TopicComponent } from './topic/topic.component'; // Importa MatToolbarModule
+import { MatToolbarModule } from '@angular/material/toolbar'; // Importa MatToolbarModule
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProfileComponent, HeaderNavComponent, TopicComponent],
+  declarations: [AppComponent, HomeComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

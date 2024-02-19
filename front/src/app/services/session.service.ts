@@ -8,21 +8,29 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
-
+  public isLogged = false;
   public user: User | undefined;
+
+  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
+
+  public $isLogged(): Observable<boolean> {
+    return this.isLoggedSubject.asObservable();
+  }
 
   public logIn(user: User): void {
     this.user = user;
+    this.isLogged = true;
+    this.next();
   }
 
   public logOut(): void {
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.user = undefined;
+    this.isLogged = false;
+    this.next();
   }
 
-  public isLogged(): boolean {
-    return sessionStorage.getItem('token') !== null && sessionStorage.getItem('token') !== undefined;
+  private next(): void {
+    this.isLoggedSubject.next(this.isLogged);
   }
-
-
 }

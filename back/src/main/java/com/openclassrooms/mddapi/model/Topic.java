@@ -26,12 +26,12 @@ public class Topic {
     @Column(name = "title")
     private String title;
 
-    @Size(min = 3)
+    @Size(min = 2)
     @Column(name = "description")
     private String description;
 
     @JsonIgnore
-    @OneToMany()
+    @ManyToMany()
     @JoinTable(
             name = "Subscriptions",
             joinColumns = @JoinColumn(name = "topics_id"),
