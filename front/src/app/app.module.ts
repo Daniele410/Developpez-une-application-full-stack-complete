@@ -20,6 +20,8 @@ import { MeComponent } from './me/me.component'; // Importa MatToolbarModule
 import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopicsCardComponent } from './topic-card/topic-card.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 
 
@@ -36,9 +38,12 @@ import { TopicsCardComponent } from './topic-card/topic-card.component';
     AuthModule,
     MatToolbarModule,
     ReactiveFormsModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

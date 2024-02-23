@@ -7,7 +7,7 @@
       <div class="input">
        
           <mat-label>Username</mat-label>
-          <input matInput formControlName="username" [value]="user.name" />
+          <input matInput formControlName="name" [value]="user.name" />
         <br>
 
           <mat-label>Email</mat-label>
@@ -21,6 +21,6 @@
     <br>
     <h2>Abonnements</h2>
     <nav>
-      <app-topic-card *ngFor="let topic of topicsSubcriptions" [topics]="topic"></app-topic-card>
+      <app-topic-card *ngFor="let topic of topicsSubcriptions" topics="topic"></app-topic-card>
     </nav>
 </div>

@@ -8,12 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  private pathService = 'api/user';
+  private pathService = 'http://localhost:8080/api';
 
   constructor(private httpClient: HttpClient) { }
 
   public getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.pathService}/${id}`);
+    return this.httpClient.get<User>(`${this.pathService +'/user'}/${id}`);
+  }
+
+  public getUserMe(): Observable<User> {
+    return this.httpClient.get<User>(`${this.pathService + '/user/me'}`);
   }
 
   public delete(id: string): Observable<any> {
@@ -21,7 +25,9 @@ export class UserService {
   }
 
   public updateMe(data: any) {
-    return this.httpClient.put<User>('/api/user/me', data);
+    return this.httpClient.put<User>(`${this.pathService + '/user/me'}`, data);
+    console.log(data);
   }
+  
 
 }

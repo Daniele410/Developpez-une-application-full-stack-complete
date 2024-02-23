@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'profile',
   canActivate: [AuthGuard], component: ProfileComponent },
 
-  { path: '404', component: NotFoundComponent },
+  { path: '404', canActivate: [UnauthGuard], component: NotFoundComponent },
 
   { path: '**', redirectTo: '404' }
 ];
