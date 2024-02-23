@@ -8,30 +8,29 @@ import { Topics } from './interfaces/topics.interface';
 })
 export class TopicsService {
 
+  private pathService = 'http://localhost:8080/api'; 
+
   constructor(private http: HttpClient) {}
   private cachedTopics$?: Observable<Topics[]>;
 
   public getTopics(): Observable<Topics[]> {
-    if (!this.cachedTopics$) {
-      this.cachedTopics$ = this.http.get<Topics[]>('/api/topics').pipe(shareReplay({ refCount: true, bufferSize: 1 }));
-    }
-
-    return this.cachedTopics$;
+    return this.http.get<Topics[]>(this.pathService + '/topics');
+    
   }
 
   public findOne(id: string): Observable<Topics> {
-    return this.http.get<Topics>(`/api/topics/${id}`);
+    return this.http.get<Topics>(this.pathService + `/topics/${id}`);
   }
 
   public getUserSubscribedTopics(): Observable<Topics[]> {
-    return this.http.get<Topics[]>('/api/topics/mySubscriptions');
+    return this.http.get<Topics[]>(this.pathService + '/topics/subscribed');
   }
 
   public subscribeToTopic(topicsId: number): Observable<void> {
-    return this.http.post<void>(`/api/topics/${topicsId}/subscribe`, {});
+    return this.http.post<void>(this.pathService + `/topics/${topicsId}/subscribe`, {});
   }
 
   public unsubscribeFromTopics(topicsId: number): Observable<void> {
-    return this.http.delete<void>(`/api/topics/${topicsId}/unsubscribe`);
+    return this.http.delete<void>(this.pathService + `/topics/${topicsId}/unsubscribe`);
   }
 }

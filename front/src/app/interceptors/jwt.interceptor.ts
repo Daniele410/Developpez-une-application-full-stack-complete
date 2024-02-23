@@ -7,10 +7,11 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private sessionService: SessionService) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler) {
-    if (this.sessionService.isLogged) {
+    if (this.sessionService.isLogged()) {
       request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.sessionService.sessionInformation!.token}`,
+        setHeaders: { 
+          "content-type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       });
     }

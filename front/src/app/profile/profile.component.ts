@@ -35,7 +35,7 @@ import { Topics } from '../interfaces/topics.interface';
     }
   
     public form = this.fb.group({
-      username: [this.user.username, [Validators.required, Validators.minLength(3)]],
+      name: [this.user.name, [Validators.required, Validators.minLength(2)]],
       email: [this.user.email, [Validators.required, Validators.email]],
     });
   
@@ -49,7 +49,7 @@ import { Topics } from '../interfaces/topics.interface';
         this.updateValid = true;
         setTimeout(() => {
           this.updateValid = false;
-        }, 3000);
+        }, 3500);
       });
     }
   

@@ -7,7 +7,7 @@ import { Topics } from './interfaces/topics.interface';
   providedIn: 'root'
 })
 export class UserSessionService {
-
+  
   public isLogged = false;
   public subscriptions: Topics[] = [];
   public user: User = {} as User;
@@ -38,6 +38,7 @@ export class UserSessionService {
   public logIn(token: string): void {
     localStorage.setItem('token', token);
     this.isLogged = true;
+    console.log('User logged in:', this.isLogged);
     this.next();
   }
 
@@ -46,6 +47,7 @@ export class UserSessionService {
     this.setUserInformation({} as User);
     this.setSubscriptions([]);
     this.isLogged = false;
+    console.log('User logout :', this.isLogged);
     this.next();
   }
 
