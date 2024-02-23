@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -49,6 +50,7 @@ public class UserServiceImpl implements IUserService {
         User user = getUserByEmail(userDetails.getUsername());
         user.setName(modifiedUser.getName());
         user.setEmail(modifiedUser.getEmail());
+        user.setUpdatedAt(LocalDateTime.now());
         log.info("modify user");
         return userRepository.save(user);
     }

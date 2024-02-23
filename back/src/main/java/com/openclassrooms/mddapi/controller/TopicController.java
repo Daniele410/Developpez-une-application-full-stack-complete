@@ -37,6 +37,16 @@ public class TopicController {
         return ResponseEntity.ok(savedTopic);
     }
 
+    @GetMapping("/topics/subscribed")
+    public ResponseEntity<List<TopicResponseDTO>> retrieveUserSubscribedTopics() {
+        List<Topic> topics = topicService.getUserSubscribedTopics();
+        List<TopicResponseDTO> responseDTOs = topics.stream()
+                .map(TopicResponseDTO::new)
+                .collect(Collectors.toList());
+        log.info("retrieved user subscribed topics");
+        return ResponseEntity.ok(responseDTOs);
+    }
+
     @PostMapping("/topics/subscribe/{topicsId}")
     public ResponseEntity<?> subscribeTopic(@PathVariable("topics_id") Long topicsId) {
         topicService.subscribe(topicsId);

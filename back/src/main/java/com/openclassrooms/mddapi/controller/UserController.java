@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.IUserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping("/user/me")
-    public ResponseEntity<UserResponseDTO> modifyUser(@RequestBody UserResponseDTO modifiedUser) {
+    public ResponseEntity<UserResponseDTO> modifyUser(@RequestBody @Valid UserResponseDTO modifiedUser) {
         User user = userService.modifyUser(modifiedUser);
         UserResponseDTO responseDTO = new UserResponseDTO(user);
         return ResponseEntity.ok(responseDTO);
