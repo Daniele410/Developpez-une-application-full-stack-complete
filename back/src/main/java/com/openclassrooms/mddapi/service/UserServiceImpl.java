@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.UserResponseDTO;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,9 @@ import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +40,17 @@ public class UserServiceImpl implements IUserService {
     public List<User> getAllUsers() {
         log.info("get all users");
         return userRepository.findAll();
+    }
+
+    @Override
+    public User modifyUser(UserResponseDTO modifiedUser) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = getUserByEmail(userDetails.getUsername());
+        user.setName(modifiedUser.getName());
+        user.setEmail(modifiedUser.getEmail());
+        log.info("modify user");
+        return userRepository.save(user);
     }
 
 

@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -21,11 +23,20 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        CorsConfigurationSource source = request -> {
+            CorsConfiguration corsConfiguration = new CorsConfiguration();
+            corsConfiguration.applyPermitDefaultValues();
+            corsConfiguration.addAllowedOrigin("*");
+            corsConfiguration.addAllowedMethod("*");
+            corsConfiguration.addAllowedHeader("*");
+            return corsConfiguration;
+        };
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .cors((cors) -> cors.configurationSource(source))
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/auth/register", "/api/auth/authenticate", "/api/auth/login",
+                        .requestMatchers("/api/auth/register", "/api/auth/authenticate", "/api/auth/login"
+                                , "/api/topics",
                                 // -- Swagger UI v2
                                 "/v2/api-docs",
                                 "/swagger-resources",
@@ -42,6 +53,7 @@ public class SecurityConfiguration {
                                 "/images/**",
                                 "static/images/**"
                         )
+
                         .permitAll()
                         .anyRequest()
                         .authenticated()

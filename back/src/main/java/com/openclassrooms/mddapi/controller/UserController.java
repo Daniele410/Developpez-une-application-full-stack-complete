@@ -48,4 +48,12 @@ public class UserController {
                 new UserResponseDTO(user.get());
         return ResponseEntity.ok(meResponse);
     }
+
+    @PutMapping("/user/me")
+    public ResponseEntity<UserResponseDTO> modifyUser(@RequestBody UserResponseDTO modifiedUser) {
+        User user = userService.modifyUser(modifiedUser);
+        UserResponseDTO responseDTO = new UserResponseDTO(user);
+        return ResponseEntity.ok(responseDTO);
+    }
+
 }
