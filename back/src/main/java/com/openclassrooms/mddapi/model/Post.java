@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,22 +21,20 @@ public class Post {
     private Long id;
     private String title;
     private String description;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @JsonIgnore
-    @OneToOne(
+    @ManyToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
+            fetch = FetchType.EAGER
     )
     @JoinColumn(nullable = false, name = "author_id", referencedColumnName = "id")
     private User author;
 
-    @OneToOne(
+    @ManyToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
+            fetch = FetchType.EAGER
     )
     @JoinColumn(nullable = false, name = "topic_id", referencedColumnName = "id")
     private Topic topics;

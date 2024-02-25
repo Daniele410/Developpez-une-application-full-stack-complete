@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TopicServiceImpl implements ITopicService {
@@ -38,6 +39,11 @@ public class TopicServiceImpl implements ITopicService {
     }
 
     @Override
+    public Optional<Topic> getTopicByTitle(String name) {
+        return topicRepository.findTopicByTitle(name);
+    }
+
+    @Override
     public List<Topic> getAllTopics() {
         return topicRepository.findAll();
     }
@@ -47,27 +53,12 @@ public class TopicServiceImpl implements ITopicService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-        List<Topic> topics = topicRepository.findAllById(Collections.singleton(user.getId()));
-        return topics;
+        return topicRepository.findAllById(Collections.singleton(user.getId()));
     }
-
-//    @Override
-//    public void subscribe(Topic topic) {
-//        Topic topicFind = topicRepository.findById(topic.getId()).orElseThrow();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        User user = userService.getUserByEmail(userDetails.getUsername());
-//        if (topicFind.getUsers().contains(user)) {  // if user is already subscribed to the topic
-//            log.info("User is already subscribed to the topic");
-//        } else {
-//            topic.getUsers().add(user);
-//            topicRepository.save(topic);
-//        }
-//    }
 
     @Override
     public Topic createTopic(TopicResponseDTO topicResponseDTO) {
-        Topic topic = new Topic().builder()
+        Topic topic = Topic.builder()
                 .title(topicResponseDTO.getTitle())
                 .description(topicResponseDTO.getDescription())
                 .build();
@@ -106,7 +97,6 @@ public class TopicServiceImpl implements ITopicService {
             topicRepository.save(topic);
         } else {
             log.info("User is not subscribed to the topic");
-            return;
         }
     }
 

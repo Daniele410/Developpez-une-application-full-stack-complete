@@ -1,6 +1,9 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.PostResponseDTO;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.model.Post;
+import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +12,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class PostServiceImpl implements IPostService{
 
-
     private static PostRepository postRepository;
+
+    private static ITopicService topicService;
 
     private static IUserService userService;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository, IUserService userService) {
+    public PostServiceImpl(PostRepository postRepository, IUserService userService, ITopicService topicService) {
         PostServiceImpl.postRepository = postRepository;
         PostServiceImpl.userService = userService;
+        PostServiceImpl.topicService = topicService;
     }
 
     @Override
@@ -36,14 +42,21 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
-    public Post savePost(Post post) {
+    public PostResponseDTO savePost(PostResponseDTO postResponseDTO) throws TopicNotFoundException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-        post.setAuthor(user);
-        post.setTitle(post.getTitle());
-        post.setDescription(post.getDescription());
-        return postRepository.save(post);
+        Topic topic = topicService.getTopicByTitle(postResponseDTO.getTopics()).orElseThrow(() -> new TopicNotFoundException("Topic not found"));
+        Post post = Post.builder()
+                .title(postResponseDTO.getTitle())
+                .description(postResponseDTO.getDescription())
+                .author(user)
+                .topics(topic)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+        postRepository.save(post);
+        return postResponseDTO;
     }
 
 

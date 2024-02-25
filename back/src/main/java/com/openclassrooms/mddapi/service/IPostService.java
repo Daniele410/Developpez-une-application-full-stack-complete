@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.PostResponseDTO;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.model.Post;
 
 import java.util.List;
@@ -9,5 +11,5 @@ public interface IPostService {
 
     List<Post> getAllPosts();
 
-    Post savePost(Post post);
+    PostResponseDTO savePost(PostResponseDTO postResponseDTO) throws TopicNotFoundException;
 }

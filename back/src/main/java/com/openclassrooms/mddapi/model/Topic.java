@@ -31,7 +31,7 @@ public class Topic {
     private String description;
 
     @JsonIgnore
-    @ManyToMany()
+    @OneToMany()
     @JoinTable(
             name = "Subscriptions",
             joinColumns = @JoinColumn(name = "topics_id"),
