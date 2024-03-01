@@ -3,20 +3,16 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import { UserSessionService } from '../user-session.service';
-import { UserService } from '../services/user.service';
-import { TopicsService } from '../topics.service';
-import { Topics } from '../interfaces/topics.interface';
-
-
+import { UserSessionService } from '../../services/user-session.service';
+import { UserService } from '../../services/user.service';
+import { TopicsService } from '../../services/topics.service';
+import { Topics } from '../../interfaces/topics.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-
-
 
   export class ProfileComponent implements OnInit, OnDestroy {
     public user: any = this.userSessionService.user;

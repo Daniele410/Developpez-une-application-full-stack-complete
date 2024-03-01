@@ -1,0 +1,92 @@
+<app-header-nav></app-header-nav>
+<mat-card>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title</label>
+    <input type="text" formControlName="title" id="title">
+    <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched">
+      <p style="color: red;">Title is required.</p>
+    </div>
+   
+    <label for="description">Description</label>
+    <textarea formControlName="description" id="description"></textarea>
+    <div *ngIf="postForm.get('description')?.invalid && postForm.get('description')?.touched">
+      <p style="color: red;">Description is required.</p>
+    </div>
+   
+    <label for="topics">Topics</label>
+    <select formControlName="topics" id="topics">
+      <option *ngFor="let topic of topics" [value]="topic.title">{{topic.title}}</option>
+    </select>
+    <div *ngIf="postForm.get('topics')?.invalid && postForm.get('topics')?.touched">
+      <p style="color: red;">Please select a topic.</p>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</mat-card>
+
+<!-- <div class="example-container">
+  <mat-form-field hintLabel="Max 10 characters">
+    <mat-label>Enter some input</mat-label>
+    <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+    <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select me</mat-label>
+    <mat-select>
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+  </mat-form-field>
+</div> -->
+
+<!-- <select formControlName="topics" name="topic">
+  <option *ngFor="let topic of topics" [value]="topic.id">{{topic.title}}</option>
+</select>  -->
+
+<!-- <mat-card-header fxLayoutAlign="center center">
+  <mat-card-title>NEW POST</mat-card-title>
+</mat-card-header>
+<form class="post-form" [formGroup]="postForm" (ngSubmit)="onSubmit()"> -->
+
+  <!-- <mat-card-content fxLayout="column" >
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" id="title">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" id="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Topics</mat-label>
+      <mat-select formControlName="topics" name="topic">
+        <mat-option *ngFor="let topic of topics" [value]="topic.id">{{topic.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </mat-card-content> -->
+  
+  <!-- <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Topics</mat-label>
+    <mat-select formControlName="topics" name="topic">
+      <mat-option *ngFor="let topic of topics" [value]="topic.id">{{topic.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form> -->

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { User } from './interfaces/user.interface';
+import { User } from '../interfaces/user.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Topics } from './interfaces/topics.interface';
+import { Topics } from '../interfaces/topics.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSessionService {
+  $userInformation() {
+    throw new Error('Method not implemented.');
+  }
   
   public isLogged = false;
   public subscriptions: Topics[] = [];

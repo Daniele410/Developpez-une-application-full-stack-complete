@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from 'src/app/header/header.component';
+import { HeaderComponent } from 'src/app/components-header/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 const materialModules = [
@@ -26,7 +26,7 @@ const materialModules = [
   declarations: [
     RegisterComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     AuthRoutingModule,
