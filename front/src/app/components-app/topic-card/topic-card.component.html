@@ -1,7 +1,7 @@
-<p>topic-card works!</p>
+<h2>Articles</h2>
 <mat-card *ngFor = "let topic of topics "class="card">
     <p class="title">{{ topic.title }}</p>
     <p> Description : {{ topic.description }}</p>
     <button mat-flat-button color="primary">{{ userSubscribed ? "Se désabonner" :
       "S'abonner"}}</button>
-  </mat-card>
+</mat-card>

@@ -29,16 +29,9 @@ export class RegisterComponent {
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
-    this.authService.register(registerRequest).subscribe(
-      (response: AuthSuccess) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me().subscribe((user: User) => {
-          this.sessionService.logIn(user);
-          this.router.navigate(['/rentals'])
-        });
-      },
-      error => this.onError = true
-    );
+    this.authService.register(registerRequest).subscribe({
+      next: (value: AuthSuccess) => this.router.navigate(['/login']),
+      error: _ => this.onError = true,
+    });
   }
-
 }

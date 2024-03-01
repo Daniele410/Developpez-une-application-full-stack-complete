@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Topics } from '../interfaces/topics.interface';
+import { Topics } from '../../interfaces/topics.interface';
 import { Subscription } from 'rxjs';
-import { UserSessionService } from '../user-session.service';
-import { TopicsService } from '../topics.service';
+import { UserSessionService } from '../../services/user-session.service';
+import { TopicsService } from '../../services/topics.service';
 
 @Component({
   selector: 'app-topic-card',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../services/session.service';
-import { User } from '../interfaces/user.interface';
+import { SessionService } from '../../services/session.service';
+import { User } from '../../interfaces/user.interface';
 import {Router} from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-me',
