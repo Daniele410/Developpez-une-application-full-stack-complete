@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.TopicResponseDTO;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.service.ITopicService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class TopicController {
     }
 
     @PostMapping("/topics")
-    public ResponseEntity<Topic> saveTopic(@RequestBody TopicResponseDTO topic) {
+    public ResponseEntity<Topic> saveTopic(@RequestBody @Valid TopicResponseDTO topic) {
         Topic savedTopic = topicService.createTopic(topic);
         log.info("topic saved");
         return ResponseEntity.ok(savedTopic);

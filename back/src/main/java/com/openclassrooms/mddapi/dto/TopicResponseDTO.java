@@ -4,7 +4,6 @@ import com.openclassrooms.mddapi.model.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.time.LocalDateTime;
 
@@ -14,10 +13,8 @@ import java.time.LocalDateTime;
 public class TopicResponseDTO {
     Long id;
 
-    @NonNull
     String title;
 
-    @NonNull
     String description;
 
     private LocalDateTime created_at;

@@ -4,7 +4,6 @@ import com.openclassrooms.mddapi.dto.PostResponseDTO;
 import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.service.IPostService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<PostResponseDTO> savePost(@Valid @RequestBody PostResponseDTO post) throws TopicNotFoundException {
+    public ResponseEntity<PostResponseDTO> savePost(@RequestBody PostResponseDTO post) throws TopicNotFoundException {
         PostResponseDTO savedPost = postService.savePost(post);
         log.info("post saved");
         return ResponseEntity.ok(savedPost);
