@@ -6,8 +6,8 @@ export interface Post {
     topic: Topics,
     author: User,
     title: string,
-    content: string,
-    topic_id: number,
+    description: string,
+    topics: string,
     createdAt: Date,
     updatedAt: Date,
 }

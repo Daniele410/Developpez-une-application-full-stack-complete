@@ -1,3 +1,18 @@
 <app-header-nav></app-header-nav>
 <button mat-raised-button color="primary" routerLink="/create-post">New Post</button>
-<p>post works!</p>
+
+<mat-card *ngFor = "let post of posts "class="card">
+    <p class="title">{{ post.title }}</p>
+    <p> Description : {{ post.description }}</p>
+    <p> Topics : {{ post.topics }}</p>
+    <!-- <button mat-flat-button color="primary">{{ userSubscribed ? "Se désabonner" :
+      "S'abonner"}}</button> -->
+</mat-card>
+<!-- id: number,
+topic: Topics,
+author: User,
+title: string,
+content: string,
+topic_id: number,
+createdAt: Date,
+updatedAt: Date, -->
