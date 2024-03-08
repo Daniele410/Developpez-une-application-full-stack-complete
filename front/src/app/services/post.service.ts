@@ -13,8 +13,8 @@ export class PostService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public all(): Observable<Post[]>{
-    return this.httpClient.get<Post[]>(this.pathService+'/posts');
+  public getPosts(): Observable<Post[]>{
+    return this.httpClient.get<Post[]>(this.pathService +'/posts');
   }
 
   public detail(id:string): Observable<Post>{
