@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ITopicService {
-    Topic getTopicById(Long id);
+    Optional<Topic> getTopicById(Long id);
 
     Optional<Topic> getTopicByTitle(String name);
 
@@ -17,7 +17,9 @@ public interface ITopicService {
 
     Topic createTopic(TopicResponseDTO topicResponseDTO);
 
-    void subscribe(long topicId);
+    void save(long topicId);
+
+    boolean isUserSubscribed(Topic topics);
 
     void unsubscribe(long topicsId);
 }

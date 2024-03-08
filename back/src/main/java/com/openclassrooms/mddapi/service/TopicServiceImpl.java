@@ -1,9 +1,11 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.TopicResponseDTO;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
+import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,9 +34,15 @@ public class TopicServiceImpl implements ITopicService {
         this.userService = userService;
     }
 
+    @SneakyThrows
     @Override
-    public Topic getTopicById(Long id) {
-        return topicRepository.findById(id).get();
+    public Optional<Topic> getTopicById(Long id) {
+        Optional<Topic> topicOptional = topicRepository.findById(id);
+        if (topicOptional.isPresent()) {
+            return topicOptional;
+        } else {
+            throw new TopicNotFoundException("Topic not found");
+        }
     }
 
     @Override
@@ -66,7 +73,7 @@ public class TopicServiceImpl implements ITopicService {
     }
 
     @Override
-    public void subscribe(long topicId) {
+    public void save(long topicId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
@@ -79,11 +86,12 @@ public class TopicServiceImpl implements ITopicService {
         topicRepository.save(topic);
     }
 
-    private boolean isUserSubscribed(Topic topics) {
+    @Override
+    public boolean isUserSubscribed(Topic topics) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-        return topics.getUsers().stream().anyMatch(u -> Objects.equals(u.getId(), user.getId()));
+        return topics.getUsers().contains(user);
     }
 
     @Override

@@ -48,21 +48,5 @@ public class TopicController {
         return ResponseEntity.ok(responseDTOs);
     }
 
-    @PostMapping("/topics/subscribe/{topicsId}")
-    public ResponseEntity<?> subscribeTopic(@PathVariable("topics_id") Long topicsId) {
-        topicService.subscribe(topicsId);
-        log.info("User subscribed to topic with id: " + topicsId);
-        return ResponseEntity.ok().build();
-    }
-
-//    @PostMapping("/topics/{topics_id}")
-//    public ResponseEntity<?> subscribe(@PathVariable("topics_id") Long topicsId) {
-//        try {
-//            topicService.subscribe(topicsId);
-//            return ResponseEntity.ok().build();
-//        } catch (NumberFormatException exception){
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
 
 }
