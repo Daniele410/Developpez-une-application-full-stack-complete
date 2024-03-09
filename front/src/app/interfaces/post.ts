@@ -1,7 +1,8 @@
 import { Topics } from "./topics.interface";
 import { User } from "./user.interface";
 
-export interface Post { 
+export interface Post {
+[x: string]: any; 
     id: number,
     topic: Topics,
     author: User,

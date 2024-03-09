@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public getUserMe(): Observable<User> {
-    return this.httpClient.get<User>(`${this.pathService + '/user/me'}`);
+    return this.httpClient.get<User>(`${this.pathService + '/auth/me'}`);
   }
 
   public delete(id: string): Observable<any> {

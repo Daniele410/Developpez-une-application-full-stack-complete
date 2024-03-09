@@ -30,9 +30,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { CommentComponent } from './components-app/comment/comment.component';
+import { PostDetailComponent } from './components-app/post-detail/post-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProfileComponent, HeaderNavComponent, TopicComponent, NotFoundComponent, MeComponent, TopicsCardComponent, PostComponent, CreateTopicComponent,CreatePostComponent],
+  declarations: [AppComponent, HomeComponent, ProfileComponent, HeaderNavComponent, TopicComponent, NotFoundComponent, MeComponent, TopicsCardComponent, PostComponent, CreateTopicComponent,CreatePostComponent, CommentComponent, PostDetailComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

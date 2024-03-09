@@ -7,9 +7,6 @@ import { Topics } from '../interfaces/topics.interface';
   providedIn: 'root'
 })
 export class UserSessionService {
-  $userInformation() {
-    throw new Error('Method not implemented.');
-  }
   
   public isLogged = false;
   public subscriptions: Topics[] = [];
@@ -45,7 +42,7 @@ export class UserSessionService {
     this.next();
   }
 
-  public logOut(): void {
+  public logout(): void {
     localStorage.removeItem('token');
     this.setUserInformation({} as User);
     this.setSubscriptions([]);

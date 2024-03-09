@@ -7,6 +7,7 @@ import { UserSessionService } from '../../services/user-session.service';
 import { UserService } from '../../services/user.service';
 import { TopicsService } from '../../services/topics.service';
 import { Topics } from '../../interfaces/topics.interface';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ import { Topics } from '../../interfaces/topics.interface';
 })
 
   export class ProfileComponent implements OnInit, OnDestroy {
-    public user: any = this.userSessionService.user;
+    public user: User = this.userSessionService.user;
     public updateValid: boolean = false;
     name = new FormControl('');
   
@@ -50,8 +51,8 @@ import { Topics } from '../../interfaces/topics.interface';
     }
   
     logout() {
-      this.userSessionService.logOut();
-      this.router.navigate(['/']);
+      this.userSessionService.logout();
+      this.router.navigate(['/login']);
     }
   
     ngOnInit(): void {
