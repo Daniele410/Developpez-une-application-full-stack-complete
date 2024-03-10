@@ -32,7 +32,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<PostResponseDTO> getPostById(Long id) {
+    public ResponseEntity<PostResponseDTO> getPostById(@PathVariable Long id) {
         Post post = postService.getPostById(id);
         PostResponseDTO responseDTO = new PostResponseDTO(post);
         log.info("retrieved post with id: " + id);
@@ -45,6 +45,5 @@ public class PostController {
         log.info("post saved");
         return ResponseEntity.ok(savedPost);
     }
-
 
 }

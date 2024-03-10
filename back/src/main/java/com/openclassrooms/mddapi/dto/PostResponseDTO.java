@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +20,8 @@ public class PostResponseDTO {
     @JsonIgnore
     private User authors;
     private String topics;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public PostResponseDTO(Post post) {
         this.id = post.getId();
@@ -25,6 +29,8 @@ public class PostResponseDTO {
         this.description = post.getDescription();
         this.authors = post.getAuthor();
         this.topics = post.getTopics().getTitle();
+        this.createdAt = post.getCreatedAt();
+        this.updatedAt = post.getUpdatedAt();
     }
 
 }

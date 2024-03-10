@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.openclassrooms.mddapi.model.Comment;
-import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 public class CommentResponseDTO {
     private Long id;
     private String description;
+    @JsonIgnore
     private User authorId;
-    private Post postId;
+    private Long postId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -27,7 +28,7 @@ public class CommentResponseDTO {
         this.id = comment.getId();
         this.description = comment.getDescription();
         this.authorId = comment.getAuthor();
-        this.postId = comment.getPosts();
+        this.postId = getPostId();
         this.createdAt = comment.getCreatedAt();
         this.updatedAt = comment.getUpdatedAt();
     }

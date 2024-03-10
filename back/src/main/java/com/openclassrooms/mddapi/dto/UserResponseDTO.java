@@ -29,6 +29,7 @@ public class UserResponseDTO {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
+        this.topic = user.getTopics();
         this.created_at = user.getCreatedAt();
         this.updated_at = user.getUpdatedAt();
 

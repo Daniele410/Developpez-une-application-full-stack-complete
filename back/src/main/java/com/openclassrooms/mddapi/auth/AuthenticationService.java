@@ -4,8 +4,10 @@ import com.openclassrooms.mddapi.configuration.JwtService;
 import com.openclassrooms.mddapi.dto.UserResponseDTO;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.Role;
+import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.service.ITopicService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -25,6 +28,7 @@ public class AuthenticationService {
 
 
     private final UserRepository userRepository;
+    private final ITopicService topicService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -68,11 +72,12 @@ public class AuthenticationService {
     public UserResponseDTO me(String userEmail) throws ResourceNotFoundException {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + userEmail + " not found"));
-
+        List<Topic> topics = topicService.getUserSubscribedTopics();
         UserResponseDTO response = new UserResponseDTO();
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setTopic(topics);
         response.setCreated_at(user.getCreatedAt());
         response.setUpdated_at(user.getUpdatedAt());
 

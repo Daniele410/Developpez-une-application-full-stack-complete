@@ -12,4 +12,5 @@ public interface IPostService {
     List<Post> getAllPosts();
 
     PostResponseDTO savePost(PostResponseDTO postResponseDTO) throws TopicNotFoundException;
+
 }

@@ -50,6 +50,10 @@ public class UserController {
         return ResponseEntity.ok(meResponse);
     }
 
+    /**
+     * @param modifiedUser the user modified email and name
+     * @return response entity with the modified user
+     */
     @PutMapping("/user/me")
     public ResponseEntity<UserResponseDTO> modifyUser(@RequestBody @Valid UserResponseDTO modifiedUser) {
         User user = userService.modifyUser(modifiedUser);

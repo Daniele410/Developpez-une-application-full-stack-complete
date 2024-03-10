@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
@@ -28,6 +29,16 @@ public class CommentController {
                 .map(CommentResponseDTO::new)
                 .collect(Collectors.toList());
         log.info("retrieved all comments");
+        return ResponseEntity.ok(responseDTOs);
+    }
+
+    @GetMapping("/comments/{postId}")
+    public ResponseEntity<List<CommentResponseDTO>> retrieveCommentsByPostId(@PathVariable Long postId) {
+        Optional<Comment> comments = commentService.getCommentsByPostId(postId);
+        List<CommentResponseDTO> responseDTOs = comments.stream()
+                .map(CommentResponseDTO::new)
+                .collect(Collectors.toList());
+        log.info("retrieved comments by post id");
         return ResponseEntity.ok(responseDTOs);
     }
 

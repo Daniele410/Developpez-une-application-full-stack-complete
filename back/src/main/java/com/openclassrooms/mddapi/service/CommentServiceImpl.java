@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.CommentResponseDTO;
 import com.openclassrooms.mddapi.model.Comment;
+import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
@@ -26,12 +28,26 @@ public class CommentServiceImpl implements ICommentService {
     private CommentRepository commentRepository;
 
     @Autowired
+    private IPostService postService;
+
+    @Autowired
     private IUserService userService;
 
     @Override
     public Comment getCommentById(Long id) {
         log.info("get comment by id");
         return commentRepository.findById(id).get();
+    }
+
+    @Override
+    public Optional<Comment> getCommentsByPostId(Long postId) {
+
+        if (postService.getPostById(postId) == null) {
+            log.error("Post not found");
+            return Optional.empty();
+        }
+        log.info("get comments by post id");
+        return commentRepository.findByPostsId(postId);
     }
 
     @Override
@@ -46,11 +62,13 @@ public class CommentServiceImpl implements ICommentService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
+        Post post = postService.getPostById(commentDto.getPostId());
         Comment comment = Comment.builder()
                 .description(commentDto.getDescription())
                 .author(user)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
+                .posts(post)
                 .build();
         commentRepository.save(comment);
         return comment;

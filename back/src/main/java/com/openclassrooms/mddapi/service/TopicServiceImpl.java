@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +69,7 @@ public class TopicServiceImpl implements ITopicService {
         Topic topic = Topic.builder()
                 .title(topicResponseDTO.getTitle())
                 .description(topicResponseDTO.getDescription())
+                .createdAt(LocalDateTime.now())
                 .build();
         return topicRepository.save(topic);
     }
