@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Comment } from '../interfaces/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +12,14 @@ export class CommentService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getComments(postId: string){
-    return this.httpClient.get(this.pathService +'/posts/'+postId+'/comments');
+  public getComments(postId: string): Observable<Comment[]> { 
+    return this.httpClient.get<Comment[]>(this.pathService +'/comments/'+postId);
   }
 
-  public create(postId: string, comment: string){
-    return this.httpClient.post(this.pathService +'/posts/'+postId+'/comments', {content: comment});
+  public create(postId:string ,comment: Comment): Observable<Comment>{
+    return this.httpClient.post<Comment>(this.pathService +'/comment', comment)
   }
 
-  public delete(postId: string, commentId: string){
-    return this.httpClient.delete(this.pathService +'/posts/'+postId+'/comments/'+commentId);
-  }
+ 
 
-  public update(postId: string, commentId: string, comment: string){
-    return this.httpClient.put(this.pathService +'/posts/'+postId+'/comments/'+commentId, {content: comment});
-  }
-
-  public like(postId: string, commentId: string){
-    return this.httpClient.post(this.pathService +'/posts/'+postId+'/comments/'+commentId+'/like', {});
-  }
 }

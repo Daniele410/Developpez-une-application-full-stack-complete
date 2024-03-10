@@ -1,1 +1,21 @@
-<p>comment works!</p>
+<p>Commentaires</p>
+<mat-card  *ngFor="let comment of comments">
+    <mat-card-content>{{ comment.description }}</mat-card-content>
+    <mat-card-content>{{ comment.authorId.name }}</mat-card-content>
+    <mat-card-subtitle>{{ comment.updatedAt | date:'short'}}</mat-card-subtitle>
+    
+</mat-card>
+
+<div class="comment-form">
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="comment">Add a comment:</label>
+        <textarea formControlName="comment" id="comment" rows="4" cols="50"></textarea>
+        <div *ngIf="commentForm.get('comment')?.invalid && (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)" class="text-danger">
+          Please enter a comment.
+        </div>
+      </div>
+      <button type="submit" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+  </div>
+ 
