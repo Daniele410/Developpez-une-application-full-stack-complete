@@ -23,7 +23,7 @@ export class TopicsService {
   }
 
   public getUserSubscribedTopics(): Observable<Topics[]> {
-    return this.http.get<Topics[]>(this.pathService + '/topics/subscribed');
+    return this.http.get<Topics[]>(this.pathService + '/topics/subscribe');
   }
 
   public subscribeToTopic(topicsId: number): Observable<void> {

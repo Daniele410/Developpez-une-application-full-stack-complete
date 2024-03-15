@@ -23,4 +23,12 @@ export class TopicService {
   public create(topic: Topics): Observable<Topics>{
     return this.httpClient.post<Topics>(this.pathService, topic)
   }
+
+  subscribeToTopic(topicId: string, isSubscribed: boolean): Observable<any> {
+    const body = {
+      id: topicId,
+      isSubscribed: isSubscribed
+    };
+    return this.httpClient.post(this.pathService + '/subscribe', body);
+  }
 }

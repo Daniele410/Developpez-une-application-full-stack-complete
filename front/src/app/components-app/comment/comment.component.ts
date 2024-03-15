@@ -21,7 +21,6 @@ export class CommentComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private commentService: CommentService,
-    private postService: PostService,
     
   ) { }
 

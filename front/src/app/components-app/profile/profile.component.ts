@@ -50,16 +50,18 @@ import { User } from 'src/app/interfaces/user.interface';
       });
     }
   
-    logout() {
-      this.userSessionService.logout();
-      this.router.navigate(['/login']);
-    }
-  
+    
+
     ngOnInit(): void {
       this.topicsService.getUserSubscribedTopics().subscribe((res) => this.userSessionService.setSubscriptions(res));
       this.destroy$ = this.userSessionService.$subscriptions().subscribe((subscriptions) => {
         this.topicsSubcriptions = subscriptions;
       });
+    }
+
+    logout() {
+      this.userSessionService.logout();
+      this.router.navigate(['/login']);
     }
   
     ngOnDestroy(): void {

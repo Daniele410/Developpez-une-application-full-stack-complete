@@ -2,6 +2,9 @@
 <mat-card *ngFor = "let topic of topics "class="card">
     <p class="title">{{ topic.title }}</p>
     <p> Description : {{ topic.description }}</p>
-    <button mat-flat-button color="primary">{{ userSubscribed ? "Se désabonner" :
-      "S'abonner"}}</button>
+    
+    
+    <button mat-flat-button color="primary" (click)="ngOnInit()">
+      {{ userSubscribed ? "Se désabonner" : "S'abonner" }}
+    </button>
 </mat-card>
