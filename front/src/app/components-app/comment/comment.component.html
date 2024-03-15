@@ -1,7 +1,6 @@
 <p>Commentaires</p>
 <mat-card  *ngFor="let comment of comments">
     <mat-card-content>{{ comment.description }}</mat-card-content>
-    <mat-card-content>{{ comment.authorId.name }}</mat-card-content>
     <mat-card-subtitle>{{ comment.updatedAt | date:'short'}}</mat-card-subtitle>
 </mat-card>
 
