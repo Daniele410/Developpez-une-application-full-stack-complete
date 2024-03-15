@@ -21,8 +21,8 @@ export class CommentComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private commentService: CommentService,
-    private postService: PostService
-
+    private postService: PostService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -58,16 +58,16 @@ export class CommentComponent implements OnInit {
         postId: this.postId,
         description: this.commentForm.value.comment
       };
-      this.commentService.create(commentData.postId,commentData.description).subscribe(
-        (response) => {
+      this.commentService.create(commentData.postId, commentData.description).subscribe({
+        next: (response) => {
           console.log('Comment saved successfully:', response);
           this.loadComments();
           this.commentForm.reset(); // Reset the form after successful submission
         },
-        (error) => {
+        error: (error) => {
           console.error('Error saving comment:', error);
         }
-      );
+      });
     } else {
       if (this.commentForm.get('comment')?.invalid) {
         alert('Please enter a comment.');
