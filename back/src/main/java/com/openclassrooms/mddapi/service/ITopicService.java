@@ -17,7 +17,7 @@ public interface ITopicService {
 
     Topic createTopic(TopicResponseDTO topicResponseDTO);
 
-    void save(long topicId);
+    String saveSubScribe(long topicId, Boolean isSubscribed);
 
     boolean isUserSubscribed(Topic topics);
 

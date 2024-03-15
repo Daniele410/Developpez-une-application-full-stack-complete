@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ICommentService {
     Comment getCommentById(Long id);
 
-    Optional<Comment> getCommentsByPostId(Long postId);
+    Optional<List<Comment>> getCommentsByPostId(Long postId);
 
     List<Comment> getAllComments();
 

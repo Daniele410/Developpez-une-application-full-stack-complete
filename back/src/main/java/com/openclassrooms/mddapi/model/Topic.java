@@ -39,6 +39,8 @@ public class Topic {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    private Boolean isSubscribed;
+
     @JsonIgnore
     @OneToMany()
     @JoinTable(

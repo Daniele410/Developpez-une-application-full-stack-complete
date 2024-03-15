@@ -6,6 +6,8 @@ import com.openclassrooms.mddapi.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +22,9 @@ public class PostResponseDTO {
     @JsonIgnore
     private User authors;
     private String topics;
+    @CreatedDate
     private LocalDateTime createdAt;
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public PostResponseDTO(Post post) {
@@ -32,5 +36,4 @@ public class PostResponseDTO {
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getUpdatedAt();
     }
-
 }

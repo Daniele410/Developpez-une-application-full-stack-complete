@@ -75,17 +75,24 @@ public class TopicServiceImpl implements ITopicService {
     }
 
     @Override
-    public void save(long topicId) {
+    public String saveSubScribe(long topicId, Boolean isSubscribed) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
         Topic topic = this.topicRepository.findById(topicId).orElseThrow();
+        if (isSubscribed)
         if (isUserSubscribed(topic)) {
-            return;
+            log.info("User is already subscribed to the topic");
+            return "Topic already subscribed to";
         }
-        topic.getUsers().add(user);
-        user.getTopics().add(topic);
-        topicRepository.save(topic);
+        if (isSubscribed) {
+            topic.getUsers().add(user);
+            topicRepository.save(topic);
+            return "Subscribed to topic successfully";
+        } else {
+            unsubscribe(topicId);
+            return "Unsubscribed to topic successfully";
+        }
     }
 
     @Override

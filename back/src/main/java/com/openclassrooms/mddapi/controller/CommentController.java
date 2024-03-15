@@ -34,8 +34,8 @@ public class CommentController {
 
     @GetMapping("/comments/{postId}")
     public ResponseEntity<List<CommentResponseDTO>> retrieveCommentsByPostId(@PathVariable Long postId) {
-        Optional<Comment> comments = commentService.getCommentsByPostId(postId);
-        List<CommentResponseDTO> responseDTOs = comments.stream()
+        Optional<List<Comment>> comments = commentService.getCommentsByPostId(postId);
+        List<CommentResponseDTO> responseDTOs = comments.orElse(null).stream()
                 .map(CommentResponseDTO::new)
                 .collect(Collectors.toList());
         log.info("retrieved comments by post id");

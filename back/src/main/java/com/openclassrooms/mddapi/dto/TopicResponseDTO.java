@@ -17,6 +17,8 @@ public class TopicResponseDTO {
 
     String description;
 
+    Boolean isSubscribed;
+
     LocalDateTime created_at;
 
     LocalDateTime updated_at;
@@ -25,6 +27,7 @@ public class TopicResponseDTO {
         this.id = topic.getId();
         this.title = topic.getTitle();
         this.description = topic.getDescription();
+        this.isSubscribed = topic.getIsSubscribed();
         this.created_at = topic.getCreatedAt();
         this.updated_at = topic.getUpdatedAt();
     }

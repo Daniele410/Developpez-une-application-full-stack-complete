@@ -40,7 +40,7 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public Optional<Comment> getCommentsByPostId(Long postId) {
+    public Optional<List<Comment>> getCommentsByPostId(Long postId) {
 
         if (postService.getPostById(postId) == null) {
             log.error("Post not found");

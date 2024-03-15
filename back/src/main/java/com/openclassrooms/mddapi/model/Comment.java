@@ -28,7 +28,7 @@ public class Comment {
     private LocalDateTime updatedAt;
 
     @JsonIgnore
-    @OneToOne(
+    @ManyToOne(
             fetch = FetchType.EAGER
     )
     @JoinColumn(nullable = false, name = "author_id", referencedColumnName = "id")
