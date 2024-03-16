@@ -26,11 +26,11 @@ export class TopicsService {
     return this.http.get<Topics[]>(this.pathService + '/topics/subscribe');
   }
 
-  public subscribeToTopic(topicsId: number): Observable<void> {
-    return this.http.post<void>(this.pathService + `/topics/${topicsId}/subscribe`, {});
-  }
+  // public subscribeToTopic(topicsId: number): Observable<void> {
+  //   return this.http.post<void>(this.pathService + `/topics/${topicsId}/subscribe`, {});
+  // }
 
-  public unsubscribeFromTopics(topicsId: number): Observable<void> {
-    return this.http.delete<void>(this.pathService + `/topics/${topicsId}/unsubscribe`);
-  }
+  // public unsubscribeFromTopics(topicsId: number): Observable<void> {
+  //   return this.http.delete<void>(this.pathService + `/topics/${topicsId}/unsubscribe`);
+  // }
 }

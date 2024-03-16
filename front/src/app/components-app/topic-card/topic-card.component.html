@@ -4,7 +4,8 @@
     <p> Description : {{ topic.description }}</p>
     
     
-    <button mat-flat-button color="primary" (click)="ngOnInit()">
+    
+    <button mat-flat-button color="primary" (click)="subscribeToTopic()">
       {{ userSubscribed ? "Se désabonner" : "S'abonner" }}
     </button>
 </mat-card>

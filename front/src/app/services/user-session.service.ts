@@ -2,11 +2,17 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Topics } from '../interfaces/topics.interface';
+import { Router, RouterEvent, Routes } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSessionService {
+
+  constructor(
+    private router: Router
+    
+  ) { }
   
   public isLogged = false;
   public subscriptions: Topics[] = [];
@@ -15,6 +21,7 @@ export class UserSessionService {
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
   private subscriptionsSubject = new BehaviorSubject<Topics[]>(this.subscriptions);
   private userInformationSubject = new BehaviorSubject<User>(this.user);
+  
 
   public setSubscriptions(subscriptions: Topics[]): void {
     this.subscriptions = subscriptions;
@@ -47,8 +54,8 @@ export class UserSessionService {
     this.setUserInformation({} as User);
     this.setSubscriptions([]);
     this.isLogged = false;
-    console.log('User logout :', this.isLogged);
-    this.next();
+    this.isLoggedSubject.next(this.isLogged);
+    this.router.navigate(['/login']);
   }
 
   private next(): void {
