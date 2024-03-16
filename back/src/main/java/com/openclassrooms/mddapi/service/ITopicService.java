@@ -21,5 +21,7 @@ public interface ITopicService {
 
     boolean isUserSubscribed(Topic topics);
 
+    boolean isUserSubscribedToTopicById(long topicId);
+
     void unsubscribe(long topicsId);
 }

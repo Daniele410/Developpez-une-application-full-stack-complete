@@ -23,11 +23,11 @@ public class TopicResponseDTO {
 
     LocalDateTime updated_at;
 
+
     public TopicResponseDTO(Topic topic) {
         this.id = topic.getId();
         this.title = topic.getTitle();
         this.description = topic.getDescription();
-        this.isSubscribed = topic.getIsSubscribed();
         this.created_at = topic.getCreatedAt();
         this.updated_at = topic.getUpdatedAt();
     }

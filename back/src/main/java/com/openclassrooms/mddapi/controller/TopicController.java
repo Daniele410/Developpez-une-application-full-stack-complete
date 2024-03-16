@@ -44,7 +44,6 @@ public class TopicController {
         List<TopicResponseDTO> responseDTOs = topics.stream()
                 .map(TopicResponseDTO::new)
                 .collect(Collectors.toList());
-        log.info("retrieved user subscribed topics");
         return ResponseEntity.ok(responseDTOs);
     }
 
@@ -56,5 +55,10 @@ public class TopicController {
         return ResponseEntity.ok(subscribedTopic);
     }
 
+    @GetMapping("/topics/{id}/is-subscribed")
+    public ResponseEntity<Boolean> isUserSubscribedToTopic(@RequestBody long id) {
+        boolean isSubscribed = topicService.isUserSubscribedToTopicById(id);
+        return ResponseEntity.ok(isSubscribed);
+    }
 
 }

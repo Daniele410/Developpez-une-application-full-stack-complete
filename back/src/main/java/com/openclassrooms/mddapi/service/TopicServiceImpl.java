@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,17 +60,23 @@ public class TopicServiceImpl implements ITopicService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-        return topicRepository.findAllById(Collections.singleton(user.getId()));
+        List<Topic> topics = topicRepository.findAllTopicsByUsersId(user.getId());
+        return topics;
     }
 
+    @SneakyThrows
     @Override
     public Topic createTopic(TopicResponseDTO topicResponseDTO) {
+        if (getTopicByTitle(topicResponseDTO.getTitle()).isPresent()) {
+            throw new TopicNotFoundException("Topic already exists");
+        } else {
         Topic topic = Topic.builder()
                 .title(topicResponseDTO.getTitle())
                 .description(topicResponseDTO.getDescription())
                 .createdAt(LocalDateTime.now())
                 .build();
         return topicRepository.save(topic);
+    }
     }
 
     @Override
@@ -81,10 +86,10 @@ public class TopicServiceImpl implements ITopicService {
         User user = userService.getUserByEmail(userDetails.getUsername());
         Topic topic = this.topicRepository.findById(topicId).orElseThrow();
         if (isSubscribed)
-        if (isUserSubscribed(topic)) {
-            log.info("User is already subscribed to the topic");
-            return "Topic already subscribed to";
-        }
+            if (isUserSubscribed(topic)) {
+                log.info("User is already subscribed to the topic");
+                return "Topic already subscribed to";
+            }
         if (isSubscribed) {
             topic.getUsers().add(user);
             topicRepository.save(topic);
@@ -101,6 +106,12 @@ public class TopicServiceImpl implements ITopicService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
         return topics.getUsers().contains(user);
+    }
+
+    @Override
+    public boolean isUserSubscribedToTopicById(long topicId) {
+        Topic topic = this.topicRepository.findById(topicId).orElseThrow();
+        return isUserSubscribed(topic);
     }
 
     @Override
