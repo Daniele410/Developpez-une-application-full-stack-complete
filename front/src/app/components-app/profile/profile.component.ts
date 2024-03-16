@@ -26,7 +26,8 @@ import { User } from 'src/app/interfaces/user.interface';
       private topicsService: TopicsService,
       private router: Router,
       private fb: FormBuilder,
-      private title: Title
+      private title: Title,
+      private sessionService: UserSessionService
     ) {
       this.title.setTitle('MDD - Profile');
     }
@@ -51,7 +52,7 @@ import { User } from 'src/app/interfaces/user.interface';
     }
   
     
-
+  
     ngOnInit(): void {
       this.topicsService.getUserSubscribedTopics().subscribe((res) => this.userSessionService.setSubscriptions(res));
       this.destroy$ = this.userSessionService.$subscriptions().subscribe((subscriptions) => {
@@ -60,8 +61,10 @@ import { User } from 'src/app/interfaces/user.interface';
     }
 
     logout() {
-      this.userSessionService.logout();
+      this.sessionService.logout();
       this.router.navigate(['/login']);
+      sessionStorage.removeItem('token');
+      console.log(sessionStorage.getItem('token'));
     }
   
     ngOnDestroy(): void {

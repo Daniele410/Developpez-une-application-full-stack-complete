@@ -2,35 +2,31 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../features/auth/services/auth.service';
 import { User } from '../interfaces/user.interface';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public isLogged = false;
+  constructor(private router: Router) {}
   public user: User | undefined;
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
-
-  public $isLogged(): Observable<boolean> {
-    return this.isLoggedSubject.asObservable();
-  }
-
-  public logIn(user: User): void {
+  public logIn(user: User, token: string): void {
     this.user = user;
-    this.isLogged = true;
-    this.next();
+    sessionStorage.setItem('token', token);
   }
 
   public logOut(): void {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    console.log(sessionStorage.getItem('token'))
     this.user = undefined;
-    this.isLogged = false;
-    this.next();
+    this.router.navigate(['/login']);
   }
 
-  private next(): void {
-    this.isLoggedSubject.next(this.isLogged);
+  public isLogged(): boolean {
+    return sessionStorage.getItem('token') !== null && sessionStorage.getItem('token') !== undefined;
   }
+
+
 }
