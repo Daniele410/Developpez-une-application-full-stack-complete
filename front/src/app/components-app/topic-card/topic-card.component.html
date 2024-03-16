@@ -1,5 +1,5 @@
 
-<mat-card *ngFor = "let topic of topics "class="card">
+<!-- <mat-card *ngFor = "let topic of topics "class="card">
     <p class="title">{{ topic.title }}</p>
     <p> Description : {{ topic.description }}</p>
     
@@ -7,5 +7,16 @@
     
     <button mat-flat-button color="primary" (click)="subscribeToTopic()">
       {{ userSubscribed ? "Se désabonner" : "S'abonner" }}
-    </button>
+    </button> -->
+<mat-card>
+    <mat-card *ngFor="let topic of topics">
+      <mat-card-title>{{ topic.title }}</mat-card-title>
+      <p class="title">{{ topic.title }}</p>
+      <p> Description : {{ topic.description }}</p>
+      <!-- Other topic details here -->
+    
+      <button  mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
+        {{ userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
+      </button>
+    </mat-card>
 </mat-card>
