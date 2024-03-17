@@ -56,7 +56,7 @@ public class TopicController {
     }
 
     @GetMapping("/topics/{id}/is-subscribed")
-    public ResponseEntity<Boolean> isUserSubscribedToTopic(@RequestBody long id) {
+    public ResponseEntity<Boolean> isUserSubscribedToTopic(@PathVariable long id) {
         boolean isSubscribed = topicService.isUserSubscribedToTopicById(id);
         return ResponseEntity.ok(isSubscribed);
     }
