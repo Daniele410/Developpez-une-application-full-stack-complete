@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Topics } from '../../interfaces/topics.interface';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { UserSessionService } from '../../services/user-session.service';
 import { TopicsService } from '../../services/topics.service';
 import { FormGroup } from '@angular/forms';
@@ -30,30 +30,24 @@ export class TopicsCardComponent implements OnInit, OnDestroy {
  
  ngOnInit(): void {
   
-   this.topicsService.getTopics().subscribe((res) => { this.topics = res; }
-   );
-   this.route.params.subscribe(params => {
-    this.topicId = params['id'];
-   });
-//  this.userSessionService.$subscriptions().subscribe((subscriptions) => {
-//      this.userSubscribed = subscriptions.some((subscription) => subscription.id === this.topics[0].id);
-//    });
-
-  //  this.checkSubscriptionStatus(); // Controlla lo stato dell'iscrizione quando il componente viene caricato
-   
-  //  this.route.params.subscribe(params => {
-  //    this.topicId = params['id']; // Access the 'id' parameter from the URL
-  //  });
   this.topicsService.getTopics().subscribe((res) => { 
     this.topics = res; 
+    
     this.topics.forEach(topic => {
       this.route.params.subscribe(params => {
         this.topicId = params['id'];
-        console.log(`Topic ID for ${topic.title}: ${this.topicId}`);
+        console.log(`Topic ID for ${topic.title}: ${topic.id}`);
+        this.checkSubscriptionStatus(topic.id).subscribe((isSubscribed: boolean) => {
+          topic.userSubscribed = isSubscribed;
+          
+
+        });
       });
     });
   });
  }
+ 
+  
 
 toggleSubscription(topic: any): void {
   this.userSubscribed = !this.userSubscribed;
@@ -62,24 +56,26 @@ toggleSubscription(topic: any): void {
     // If the user is subscribing, call the subscribe method of the service
     this.topicService.subscribeToTopic(topic.id, true).subscribe(response => {
       console.log(`Subscribed to topic ${topic.title}`);
+      location.reload();
     });
   } else {
     // If the user is unsubscribing, call the unsubscribe method of the service
     this.topicService.subscribeToTopic(topic.id, false).subscribe(response => {
       console.log(`Unsubscribed from topic ${topic.title}`);
+      location.reload();
     });
   }
 }
 
-
-checkSubscriptionStatus(): void {
-  // Aggiorna il valore di userSubscribed in base allo stato di iscrizione
-  // Puoi chiamare il servizio per ottenere lo stato di iscrizione dal backend
-  // Esempio:
-  // this.topicService.checkSubscriptionStatus(this.topicId).subscribe((isSubscribed: boolean) => {
-  //   this.userSubscribed = isSubscribed;
-  // });
+checkSubscriptionStatus(topicId: number): Observable<boolean> {
+  return this.topicService.isUserSubscribedToTopic(topicId).pipe(
+    tap((isSubscribed: boolean) => {
+      this.userSubscribed = isSubscribed;
+    })
+  );
 }
+
+
 
 subscribeToTopic() {
   const body = {
