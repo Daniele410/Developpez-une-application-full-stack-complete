@@ -15,8 +15,9 @@
       <p> Description : {{ topic.description }}</p>
       <!-- Other topic details here -->
     
-      <button  mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
-        {{ userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
-      </button>
+       <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
+    {{ topic.userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
+  </button>
+     
     </mat-card>
 </mat-card>

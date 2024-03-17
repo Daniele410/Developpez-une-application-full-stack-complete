@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Comment } from 'src/app/interfaces/comment';
 import { CommentService } from 'src/app/services/comment.service';
-import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-comment',

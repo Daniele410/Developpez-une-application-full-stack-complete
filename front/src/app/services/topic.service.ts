@@ -31,4 +31,9 @@ export class TopicService {
     };
     return this.httpClient.post(this.pathService + '/subscribe', body);
   }
+
+  public isUserSubscribedToTopic(topicsId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.pathService + '/'+`${topicsId}`+'/is-subscribed');
+  }
+
 }
