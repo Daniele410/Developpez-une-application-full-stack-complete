@@ -4,14 +4,15 @@ import { PostService } from '../../services/post.service';
 import { TopicsService } from '../../services/topics.service';
 import { Topics } from '../../interfaces/topics.interface';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss'],
-  
+
 })
 
 export class CreatePostComponent implements OnInit {
@@ -21,8 +22,9 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private topicsService: TopicsService
-  ) {}
+    private topicsService: TopicsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -54,6 +56,7 @@ export class CreatePostComponent implements OnInit {
       this.postService.create(postData).subscribe(
         (response) => {
           console.log('Post saved successfully:', response);
+          this.router.navigate(['/posts']);
         },
         (error) => {
           console.error('Error saving post:', error);

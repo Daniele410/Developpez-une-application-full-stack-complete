@@ -4,6 +4,15 @@
   display: flex;
   justify-content: center; // Centra il contenuto orizzontalmente
 
+  .mat-card-header {
+    display: flex; // Imposta il display a flex per allineare gli elementi orizzontalmente
+    justify-content: center; // Centra l'intestazione della card orizzontalmente
+    padding: 1px; // Aggiunge spazio tra il testo e il bordo della card
+    width: 100%; // Imposta la larghezza dell'intestazione della card al 100% della larghezza della card
+    padding-bottom: 1px;
+  
+  }
+
   .mobile-image {
     display: block; // Mostra l'immagine solo sui dispositivi mobili
     text-align: center; // Centra l'immagine all'interno del form
@@ -14,26 +23,31 @@
     display: none; // Nascondi l'immagine per impostazione predefinita
   }
 
-  /* img {
-    width: 225px;
-    height: 130px;
-    top: 993px;
-    left: 1553px;
-    gap: 0px;
-    opacity: 0px;
-
-  } */
-
   .mat-card {
     width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
 
   .register-form {
     width: 100%;
-    padding: 20px;
+    padding: 50px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-top: -20px;
+    }
+  }
+
+  p {
+    margin-top: 0px;
+    text-align: center;
   }
 
   .error {
@@ -47,9 +61,13 @@
   /*     margin-top: 10px; // Aggiungi spazio sopra il campo di input
  */
   input {
-    font-size: 1px; // Imposta la dimensione del testo all'interno del campo di input
+    font-size: 20px; // Imposta la dimensione del testo all'interno del campo di input
     padding: 1px; // Aggiunge spazio tra il testo e il bordo del campo di input
   }
+
+
+
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -64,27 +82,31 @@
       left: 1553px;
       gap: 0px;
       opacity: 0px;
+      margin-top: -60px;
+      margin-bottom: auto;
 
     }
-    
-    .mat-card {
-      width: 90%; // Larghezza del card al 90% della larghezza disponibile
-      max-width: 400px; // Larghezza massima del card per dispositivi mobili
 
-     
+    .mat-card {
+      width: 100%; // Larghezza del card al 90% della larghezza disponibile
+      max-width: 100%; // Larghezza massima del card per dispositivi mobili
+
+
       .register-form {
         width: 50%; // Larghezza del form al 100% della larghezza del card
-        padding: 20px;
+        padding: 10px;
 
         p {
-          margin-top: 1px; // Aggiungi spazio tra i paragrafi
+          margin-top: 0px; // Aggiungi spazio tra i paragrafi
         }
 
         input {
-          font-size: 1px; // Imposta la dimensione del testo all'interno del campo di input
-          padding: 1px; // Aggiunge spazio tra il testo e il bordo del campo di input
+          font-size: 13px; // Imposta la dimensione del testo all'interno del campo di input
         }
+
+
       }
+
 
       .error {
         color: red;

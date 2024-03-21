@@ -1,15 +1,26 @@
 <app-header></app-header>
+
 <div class="login" fxLayout="row" fxLayoutAlign="center center">
+
     <mat-card>
+
+        <div class="mobile-image">
+            <img src="/assets/logo_p6.png" alt="logo" />
+        </div>
+
         <mat-card-header fxLayoutAlign="center center">
             <mat-card-title>Login</mat-card-title>
         </mat-card-header>
         <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+
             <mat-card-content fxLayout="column">
-                <mat-form-field fxFlex>
+                <p>Email</p>
+                <mat-form-field appearance="outline" fxFlex>
                     <input matInput placeholder="Email" formControlName="email">
                 </mat-form-field>
-                <mat-form-field fxFlex>
+
+                <p>Password</p>
+                <mat-form-field appearance="outline" fxFlex>
                     <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password"
                         formControlName="password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -18,9 +29,11 @@
                     </button>
                 </mat-form-field>
             </mat-card-content>
-            <button mat-raised-button color="basic" type="submit" [disabled]="form.invalid">Submit</button>
-            <p *ngIf="onError" class="error">An error occurred</p>
+            <div class="button-container">
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+                <p *ngIf="onError" class="error">An error occurred</p>
+            </div>
         </form>
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
     </mat-card>
 </div>
-<p>login works!</p>

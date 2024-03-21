@@ -1,0 +1,53 @@
+.topics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: rgb(89, 92, 95);
+    margin-left: 50px;
+    margin-right: 50px;
+
+
+}
+
+.topic-card {
+    flex: 0 0 48%;
+}
+
+
+
+mat-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+;
+
+    .mat-card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        
+    }
+
+    .date-author {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        align-self: flex-end;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+}
