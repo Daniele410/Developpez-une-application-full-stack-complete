@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Topics } from '../../interfaces/topics.interface';
-import { Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subscription, forkJoin, map, switchMap, tap } from 'rxjs';
 import { UserSessionService } from '../../services/user-session.service';
 import { TopicsService } from '../../services/topics.service';
 import { FormGroup } from '@angular/forms';
@@ -54,15 +54,17 @@ toggleSubscription(topic: any): void {
 
   if (this.userSubscribed) {
     // If the user is subscribing, call the subscribe method of the service
+    location.reload();
     this.topicService.subscribeToTopic(topic.id, true).subscribe(response => {
       console.log(`Subscribed to topic ${topic.title}`);
       location.reload();
     });
   } else {
     // If the user is unsubscribing, call the unsubscribe method of the service
+    location.reload();
     this.topicService.subscribeToTopic(topic.id, false).subscribe(response => {
       console.log(`Unsubscribed from topic ${topic.title}`);
-      location.reload();
+      
     });
   }
 }

@@ -18,28 +18,12 @@ post!:Post;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-
       this.postId = params['id']; // Access the 'id' parameter from the URL
-      
       console.log('Test ID:', this.postId);
-      
       this.postService.detail(this.postId).subscribe((res) => { 
       this.post = res;
-
-
-      console.log('Test Post:', this.post);
-      
-    
-    }
-    );
-
-
-
+      console.log('Test Post:', this.post);   
     });
-
-    
+    });
   }
-
-
-
 }
