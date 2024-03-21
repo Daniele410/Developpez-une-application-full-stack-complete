@@ -5,7 +5,7 @@ export interface Post {
 [x: string]: any; 
     id: number,
     topic: Topics,
-    author: User,
+    authors: User,
     title: string,
     description: string,
     topics: string,

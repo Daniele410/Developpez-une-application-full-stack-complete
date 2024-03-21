@@ -15,6 +15,7 @@ describe('CreatePostComponent', () => {
     fixture = TestBed.createComponent(CreatePostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    
   });
 
   it('should create', () => {

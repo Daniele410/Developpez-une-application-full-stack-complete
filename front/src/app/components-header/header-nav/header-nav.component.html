@@ -1,7 +1,12 @@
 <mat-toolbar>
-    <span class="spacer"></span>
-    <img src="/assets/logo_p6.png" alt="logo" />
-    <button mat-button routerLink="/posts">Post</button>
-    <button mat-button routerLink="/topics">Topics</button>
-    <button mat-button routerLink="/profile">Profile</button>
+    <div class="left">
+        <img src="/assets/logo_p6.png" alt="logo" />
+    </div>
+    <div class="right">
+        <button mat-button routerLink="/posts">Post</button>
+        <button mat-button routerLink="/topics">Topics</button>
+        <button mat-icon-button routerLink="/profile">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </div>
 </mat-toolbar>

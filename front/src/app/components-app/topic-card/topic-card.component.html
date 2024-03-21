@@ -1,23 +1,16 @@
-
-<!-- <mat-card *ngFor = "let topic of topics "class="card">
-    <p class="title">{{ topic.title }}</p>
-    <p> Description : {{ topic.description }}</p>
-    
-    
-    
-    <button mat-flat-button color="primary" (click)="subscribeToTopic()">
-      {{ userSubscribed ? "Se désabonner" : "S'abonner" }}
-    </button> -->
-<mat-card>
-    <mat-card *ngFor="let topic of topics">
+<div class="topics-container">
+  <div class="topic-card" *ngFor="let topic of topics">
+    <mat-card>
       <mat-card-title>{{ topic.title }}</mat-card-title>
-      <p class="title">{{ topic.title }}</p>
-      <p> Description : {{ topic.description }}</p>
+      <br>
+      <p class="description"> Description : {{ topic.description }}</p>
+
       <!-- Other topic details here -->
-    
-       <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
-    {{ topic.userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
-  </button>
-     
+      <div class="button-container">
+      <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
+        {{ topic.userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
+      </button>
+      </div>
     </mat-card>
-</mat-card>
+  </div>
+</div>

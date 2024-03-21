@@ -1,0 +1,31 @@
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 15px;
+
+}
+
+.card {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+}
+
+.date-author {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-card {
+    flex: 0 0 100%;
+    margin: 15px 0;
+
+    @media (min-width: 768px) {
+        flex: 0 0 calc(50% - 30px);
+        margin: 15px;
+    }
+
+}
