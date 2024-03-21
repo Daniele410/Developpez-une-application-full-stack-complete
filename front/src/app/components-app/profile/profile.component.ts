@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, forkJoin, switchMap } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { UserSessionService } from '../../services/user-session.service';
 import { UserService } from '../../services/user.service';
 import { TopicsService } from '../../services/topics.service';
 import { Topics } from '../../interfaces/topics.interface';
 import { User } from 'src/app/interfaces/user.interface';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +25,7 @@ import { User } from 'src/app/interfaces/user.interface';
       private userSessionService: UserSessionService,
       private userService: UserService,
       private topicsService: TopicsService,
+      private topicService: TopicService,
       private router: Router,
       private fb: FormBuilder,
       private title: Title,
@@ -54,11 +56,15 @@ import { User } from 'src/app/interfaces/user.interface';
     
   
     ngOnInit(): void {
-      this.topicsService.getUserSubscribedTopics().subscribe((res) => this.userSessionService.setSubscriptions(res));
-      this.destroy$ = this.userSessionService.$subscriptions().subscribe((subscriptions) => {
-        this.topicsSubcriptions = subscriptions;
+      this.topicsService.getUserSubscribedTopics().subscribe((topics) => {
+        this.topicsSubcriptions = topics;
       });
     }
+
+    getTopicsUserSubscribed(): Observable<Topics[]> { 
+      return this.topicsService.getUserSubscribedTopics();
+    }
+
 
     logout() {
       this.sessionService.logout();

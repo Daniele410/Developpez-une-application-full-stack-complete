@@ -1,22 +1,99 @@
 .register {
-    height: 100vh; // Imposta l'altezza del componente a 100% della viewport height
-    align-items: center;
+  height: 100vh; // Imposta l'altezza del componente a 100% della viewport height
+  align-items: center;
+  display: flex;
+  justify-content: center; // Centra il contenuto orizzontalmente
+
+  .mobile-image {
+    display: block; // Mostra l'immagine solo sui dispositivi mobili
+    text-align: center; // Centra l'immagine all'interno del form
+    margin-bottom: 20px; // Aggiungi spazio sotto l'immagine
+  }
+
+  img {
+    display: none; // Nascondi l'immagine per impostazione predefinita
+  }
+
+  /* img {
+    width: 225px;
+    height: 130px;
+    top: 993px;
+    left: 1553px;
+    gap: 0px;
+    opacity: 0px;
+
+  } */
+
+  .mat-card {
+    width: 300px;
     display: flex;
-    justify-content: center; // Centra il contenuto orizzontalmente
-  
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register-form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .error {
+    color: red;
+  }
+}
+
+.mat-form-field {
+  width: 100%; // Imposta la larghezza del campo di input al 100% del suo contenitore
+
+  /*     margin-top: 10px; // Aggiungi spazio sopra il campo di input
+ */
+  input {
+    font-size: 1px; // Imposta la dimensione del testo all'interno del campo di input
+    padding: 1px; // Aggiunge spazio tra il testo e il bordo del campo di input
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .register {
+
+    img {
+      padding-top: 100px;
+      display: block; // Mostra l'immagine solo sui dispositivi mobili
+      width: 225px;
+      height: 130px;
+      top: 993px;
+      left: 1553px;
+      gap: 0px;
+      opacity: 0px;
+
+    }
+    
     .mat-card {
-      width: 300px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .register-form {
-      width: 100%;
-      padding: 20px;
-    }
-  
-    .error {
-      color: red;
+      width: 90%; // Larghezza del card al 90% della larghezza disponibile
+      max-width: 400px; // Larghezza massima del card per dispositivi mobili
+
+     
+      .register-form {
+        width: 50%; // Larghezza del form al 100% della larghezza del card
+        padding: 20px;
+
+        p {
+          margin-top: 1px; // Aggiungi spazio tra i paragrafi
+        }
+
+        input {
+          font-size: 1px; // Imposta la dimensione del testo all'interno del campo di input
+          padding: 1px; // Aggiunge spazio tra il testo e il bordo del campo di input
+        }
+      }
+
+      .error {
+        color: red;
+        margin-top: 10px; // Aggiungi spazio tra il messaggio di errore e il pulsante di invio
+      }
     }
   }
+
+  app-header {
+    display: none; // Nascondi completamente l'header sui dispositivi mobili
+  }
+}
