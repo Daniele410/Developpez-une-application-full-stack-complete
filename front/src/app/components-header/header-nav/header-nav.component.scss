@@ -1,6 +1,7 @@
 mat-toolbar {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid black;
 }
 
 img {
@@ -14,4 +15,23 @@ img {
 
 .right {
   display: flex;
+}
+
+@media (max-width: 768px) {
+  .right button:not(.mobile-nav) {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .dropdown-menu {
+    display: block !important; /* Assicurati che il menu a tendina sia visibile */
+}
+
+img {
+  max-width: 100px;
+  min-width: 100px; /* Sostituisci 100px con la larghezza desiderata */
+}
 }

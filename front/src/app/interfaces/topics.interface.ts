@@ -1,5 +1,5 @@
 export interface Topics {
-    userSubscribed: boolean;
+    isSubscribed: boolean;
     id: number;
     title: string;
     description: string;

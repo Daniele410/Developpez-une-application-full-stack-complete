@@ -1,26 +1,42 @@
 <app-header-nav></app-header-nav>
 
 <div class="user-profile">
-    <h1>User Profile</h1>
-    <p *ngIf="updateValid" class="update--valid">Upload profile</p>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <div class="input">
-       
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="name" [value]="user.name" />
-        <br>
-
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" [value]="user.email" type="email" />
-        
-      </div>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
-    </form>
+  <h1>User Profile</h1>
+  <p *ngIf="updateValid" class="update--valid">Upload profile</p>
   
-    <button button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="user-form">
+    <mat-form-field appearance="outline" fxFlex class="input-field">
+      <input matInput placeholder="Username" formControlName="name" [value]="user.name" />
+    </mat-form-field>
+<br>
+    <mat-form-field appearance="outline" fxFlex class="input-field">
+      <input matInput placeholder="Email" formControlName="email" [value]="user.email" type="email" />
+    </mat-form-field>
+
     <br>
-    <h2>Abonnements</h2>
-    <nav>
-      <app-topic-card topicsSubcriptions topics="topic"></app-topic-card>
-    </nav>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"
+      class="submit-button">Save</button>
+  </form>
+
+  <button mat-button color="warn" (click)="logout()" class="logout-button">Logout</button>
+</div>
+
+
+<div class="topics-container">
+  <h2 class="subscription-title">Subscription</h2>
+
+
+  <div class="topic-card" *ngFor="let topic of subscribedTopic">
+    <mat-card>
+      <mat-card-title>{{ topic.title }}</mat-card-title>
+      <br>
+      <p class="description"> Description : {{ topic.description }}</p>
+      <div class="button-container">
+        <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
+          {{ topic.isSubscribed ? 'Subscribe' : 'Unsubscribe' }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription, forkJoin, switchMap } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { UserSessionService } from '../../services/user-session.service';
 import { UserService } from '../../services/user.service';
@@ -20,6 +20,10 @@ import { TopicService } from 'src/app/services/topic.service';
     public user: User = this.userSessionService.user;
     public updateValid: boolean = false;
     name = new FormControl('');
+    subscribedTopic: Topics[] = [];
+    topics!: Topics[];
+   
+
   
     constructor(
       private userSessionService: UserSessionService,
@@ -30,6 +34,7 @@ import { TopicService } from 'src/app/services/topic.service';
       private fb: FormBuilder,
       private title: Title,
       private sessionService: UserSessionService
+      
     ) {
       this.title.setTitle('MDD - Profile');
     }
@@ -50,17 +55,28 @@ import { TopicService } from 'src/app/services/topic.service';
         setTimeout(() => {
           this.updateValid = false;
         }, 3500);
-      });
-    }
-  
-    
-  
-    ngOnInit(): void {
-      this.topicsService.getUserSubscribedTopics().subscribe((topics) => {
-        this.topicsSubcriptions = topics;
+        this.logout();
       });
     }
 
+    ngOnInit(): void {
+      this.getTopicsUserSubscribed().subscribe((topics) => {
+        console.log(topics); // Add this line
+        this.subscribedTopic = topics;
+      });
+    }
+
+    toggleSubscription(topic: any): void {
+
+      this.topicService.subscribeToTopic(topic.id, !topic.isSubscribed).subscribe(response => {
+        console.log(`Unsubscribed from topic ${topic.title}`);
+        topic.isSubscribed = !topic.isSubscribed;
+  
+    
+      });
+    }
+
+  
     getTopicsUserSubscribed(): Observable<Topics[]> { 
       return this.topicsService.getUserSubscribedTopics();
     }
