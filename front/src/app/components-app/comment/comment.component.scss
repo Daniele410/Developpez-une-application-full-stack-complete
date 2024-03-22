@@ -1,0 +1,39 @@
+mat-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form .form-group {
+    margin-bottom: 10px;
+}
+
+.comment-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.comment-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .comment-form .form-group {
+    flex-grow: 1;
+    margin-right: 20px;
+  }
+  
+  .comment-form textarea {
+    width: 100%;
+    max-width: 500px; /* Adjust this value to make the textarea smaller or larger */
+  }
+  
+  button[mat-raised-button] {
+    align-self: flex-end;
+  }

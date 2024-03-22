@@ -8,5 +8,12 @@
         <button mat-icon-button routerLink="/profile">
             <mat-icon>account_circle</mat-icon>
         </button>
+        <select class="dropdown-menu" style="display: none;" (change)="onSelectChange($event)">
+            <option>Menu</option>
+            <option value="/profile">Profile</option>
+            <option value="/posts">Post</option>
+            <option value="/topics">Topics</option>
+        </select>
     </div>
 </mat-toolbar>
+

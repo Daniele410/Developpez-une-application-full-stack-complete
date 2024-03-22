@@ -8,7 +8,7 @@
       <!-- Other topic details here -->
       <div class="button-container">
       <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
-        {{ topic.userSubscribed ? 'Unsubscribe' : 'Subscribe' }}
+        {{ topic.isSubscribed ? 'Unsubscribe' : 'Subscribe' }}
       </button>
       </div>
     </mat-card>

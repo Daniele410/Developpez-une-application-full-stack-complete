@@ -32,6 +32,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { CommentComponent } from './components-app/comment/comment.component';
 import { PostDetailComponent } from './components-app/post-detail/post-detail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ProfileComponent, HeaderNavComponent, TopicComponent, NotFoundComponent, MeComponent, TopicsCardComponent, PostComponent, CreateTopicComponent,CreatePostComponent, CommentComponent, PostDetailComponent],
@@ -52,7 +53,8 @@ import { PostDetailComponent } from './components-app/post-detail/post-detail.co
     CommonModule,
     ReactiveFormsModule,
     MatSelectModule, 
-    MatInputModule
+    MatInputModule,
+    RouterModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

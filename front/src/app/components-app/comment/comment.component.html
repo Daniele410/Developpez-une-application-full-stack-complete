@@ -1,19 +1,24 @@
-<p>Commentaires</p>
-<mat-card  *ngFor="let comment of comments">
-    <mat-card-content>{{ comment.description }}</mat-card-content>
-    <mat-card-subtitle>{{ comment.updatedAt | date:'short'}}</mat-card-subtitle>
+<mat-card-header>Commentaires</mat-card-header>
+<mat-card *ngFor="let comment of comments">
+  <mat-card-content>Description: {{ comment.description }}</mat-card-content>
+  <mat-card-subtitle>Date: {{ comment.updatedAt | date:'short'}}</mat-card-subtitle>
+  <mat-card-subtitle>Author: {{ comment.author }}</mat-card-subtitle>
+  <mat-card-subtitle>Post :{{comment.postTitle}}</mat-card-subtitle>
 </mat-card>
 
 <div class="comment-form">
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="comment">Add a comment:</label>
-        <textarea formControlName="comment" id="comment" rows="4" cols="50"></textarea>
-        <div *ngIf="commentForm.get('comment')?.invalid && (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)" class="text-danger">
-          Please enter a comment.
-        </div>
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="comment">Add a comment:</label>
+      <textarea formControlName="comment" id="comment" rows="4" cols="50"></textarea>
+      <div
+        *ngIf="commentForm.get('comment')?.invalid && (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)"
+        class="text-danger">
+        Please enter a comment.
       </div>
-      <button type="submit" [disabled]="commentForm.invalid">Submit</button>
-    </form>
-  </div>
- 
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">
+      <mat-icon>arrow_forward</mat-icon> Submit
+    </button>
+  </form>
+</div>

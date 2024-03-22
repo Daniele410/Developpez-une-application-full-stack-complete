@@ -1,61 +1,98 @@
 .user-profile {
-    display: flexbox;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 20px;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    
-    h1 {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-  
-    .update--valid {
-      color: green;
-      font-weight: bold;
-    }
-  
-    form {
-      margin-bottom: 20px;
-      
-      mat-form-field {
-        width: 100%;
-        margin-bottom: 10px;
-  
-        .input {
-            display: flexbox;
-          width: 100%;
-          
-        }
-      }
-  
-      button[type="submit"] {
-        display: flexbox;
-        
-      }
-    }
-  
-    .logout {
-      margin-top: 10px;
-    }
-  
-    h2 {
-      font-size: 20px;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-  
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-  
-      app-topic-card {
-        flex-basis: calc(50% - 10px); // Per avere due card affiancate con uno spazio di 10px tra di esse
-        margin-bottom: 10px;
-      }
-    }
+.input-field {
+  margin: 10px auto;
+  align-items: center;
+}
+
+.submit-button {
+  text-align: center;
+  align-items: center;
+  display: block;
+  margin: auto;
+}
+
+.logout-button {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+}
+
+
+.topics-container {
+  text-align: center;
+  border-top: 2px solid black;
+  padding-top: 10px;
+  margin-top: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.topic-card {
+  flex: 0 0 48%;
+}
+
+mat-card {
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F5F5;
+  ;
+
+
+  .mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
   }
+
+  .date-author {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    align-self: flex-end;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+   .logout-button {
+    width: 100%;
+  }
+
+  .topics-container {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .topic-card {
+    flex: 0 0 100%;
+  }
+
+  .submit-button {
+    text-align: center;
+    align-items: center;
+    display: block;
+    margin: auto;
+  }
+}

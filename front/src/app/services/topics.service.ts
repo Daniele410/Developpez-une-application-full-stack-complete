@@ -7,6 +7,7 @@ import { Topics } from '../interfaces/topics.interface';
   providedIn: 'root'
 })
 export class TopicsService {
+  [x: string]: any;
 
   private pathService = 'http://localhost:8080/api'; 
 
