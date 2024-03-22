@@ -23,12 +23,9 @@ public class TopicController {
 
     @GetMapping("/topics")
     public ResponseEntity<List<TopicResponseDTO>> retrieveAllTopics() {
-        List<Topic> topics = topicService.getAllTopics();
-        List<TopicResponseDTO> responseDTOs = topics.stream()
-                .map(TopicResponseDTO::new)
-                .collect(Collectors.toList());
+        List<TopicResponseDTO> topics = topicService.getAllTopics();
         log.info("retrieved all topics");
-        return ResponseEntity.ok(responseDTOs);
+        return ResponseEntity.ok(topics);
     }
 
     @PostMapping("/topics")
@@ -49,10 +46,10 @@ public class TopicController {
 
 
     @PostMapping("/topics/subscribe")
-    public ResponseEntity<String> subscribeToTopic(@RequestBody @Valid TopicResponseDTO topicResponseDTO) {
+    public ResponseEntity<TopicResponseDTO> subscribeToTopic(@RequestBody @Valid TopicResponseDTO topicResponseDTO) {
         String subscribedTopic = topicService.saveSubScribe(topicResponseDTO.getId(), topicResponseDTO.getIsSubscribed());
         log.info("subscribed to topic requested");
-        return ResponseEntity.ok(subscribedTopic);
+        return ResponseEntity.ok(new TopicResponseDTO());
     }
 
     @GetMapping("/topics/{id}/is-subscribed")

@@ -11,7 +11,7 @@ public interface ITopicService {
 
     Optional<Topic> getTopicByTitle(String name);
 
-    List<Topic> getAllTopics();
+    List<TopicResponseDTO> getAllTopics();
 
     List<Topic> getUserSubscribedTopics();
 

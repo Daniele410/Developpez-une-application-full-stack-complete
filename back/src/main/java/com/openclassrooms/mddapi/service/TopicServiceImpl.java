@@ -51,8 +51,11 @@ public class TopicServiceImpl implements ITopicService {
     }
 
     @Override
-    public List<Topic> getAllTopics() {
-        return topicRepository.findAll();
+    public List<TopicResponseDTO> getAllTopics() {
+        List<Long> myTopicsId = getUserSubscribedTopics().stream().map(Topic::getId).toList();
+        List<TopicResponseDTO> allTopics = topicRepository.findAll().stream().map(TopicResponseDTO::new).toList();
+        allTopics.forEach(topic -> topic.setIsSubscribed(myTopicsId.contains(topic.getId())));
+        return allTopics;
     }
 
     @Override
