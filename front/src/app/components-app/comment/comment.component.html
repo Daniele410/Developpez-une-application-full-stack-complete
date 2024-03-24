@@ -1,24 +1,27 @@
-<mat-card-header>Commentaires</mat-card-header>
-<mat-card *ngFor="let comment of comments">
-  <mat-card-content>Description: {{ comment.description }}</mat-card-content>
-  <mat-card-subtitle>Date: {{ comment.updatedAt | date:'short'}}</mat-card-subtitle>
-  <mat-card-subtitle>Author: {{ comment.author }}</mat-card-subtitle>
-  <mat-card-subtitle>Post :{{comment.postTitle}}</mat-card-subtitle>
-</mat-card>
+<hr />
+<mat-card-header>
+  <h2>Commentaires</h2>
+</mat-card-header>
+<div class="comments-section">
+  <mat-card class="card-comment" *ngFor="let comment of comments">
+    <div class="comment-content">
+      <mat-card-content class="comment-username"> {{ comment.author }}</mat-card-content>
+      <mat-card-content class="comment-description"> {{ comment.description }}</mat-card-content>
+    </div>
+  </mat-card>
+</div>
+
 
 <div class="comment-form">
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="comment">Add a comment:</label>
-      <textarea formControlName="comment" id="comment" rows="4" cols="50"></textarea>
-      <div
-        *ngIf="commentForm.get('comment')?.invalid && (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)"
-        class="text-danger">
-        Please enter a comment.
-      </div>
+    <div class="form-content">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Add a comment:</mat-label>
+        <textarea matInput formControlName="comment" id="comment" rows="4"></textarea>
+      </mat-form-field>
+      <button mat-button color="primary" type="submit" [disabled]="commentForm.invalid">
+        <mat-icon>arrow_forward</mat-icon> 
+      </button>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">
-      <mat-icon>arrow_forward</mat-icon> Submit
-    </button>
   </form>
 </div>

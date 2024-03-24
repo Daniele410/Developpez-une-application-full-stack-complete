@@ -68,4 +68,8 @@ export class CreatePostComponent implements OnInit {
       }
     }
   }
+
+  goBack() {
+    window.history.back();
+  }
 }
