@@ -46,4 +46,8 @@ export class CreateTopicComponent {
     }
   }
 
+  goBack() {
+    window.history.back();
+  }
+
 }

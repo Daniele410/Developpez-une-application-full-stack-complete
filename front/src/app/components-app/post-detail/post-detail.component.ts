@@ -26,4 +26,9 @@ post!:Post;
     });
     });
   }
+
+  goBack() {
+    window.history.back();
+  }
+
 }

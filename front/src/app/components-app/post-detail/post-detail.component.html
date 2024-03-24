@@ -1,17 +1,18 @@
 <app-header-nav></app-header-nav>
-<mat-card-content>
 <mat-card *ngIf="post">
-  <mat-card-title>{{ post.title }}</mat-card-title>
-  <mat-card-subtitle> Creation Date: {{ post.createdAt | date:'short' }}</mat-card-subtitle>
-  <mat-card-subtitle> Upload Date {{ post.updatedAt | date:'short' }} </mat-card-subtitle>
-  <mat-card-subtitle>{{ post.authors }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ post.topic }}</mat-card-subtitle>
-  
-  <mat-card-content>Post description: {{ post.description }}<mat-card-content>
-  </mat-card-content>
-</mat-card-content>
+  <div class="title-container">
+   
+    <mat-card-title> <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>{{ post.title }}</mat-card-title>
+  </div>
+  <div class="post-details">
+    <mat-card-content>Date: {{ post.createdAt | date }}</mat-card-content>
+    <mat-card-content>Author: {{ post.authors }}</mat-card-content>
+    <mat-card-content>Topic: {{ post.topics }}</mat-card-content>
+  </div>
+  <mat-card-content>{{ post.description }}</mat-card-content>
 </mat-card>
-</mat-card-content> 
 
 <mat-card-content>
   <app-comment></app-comment>

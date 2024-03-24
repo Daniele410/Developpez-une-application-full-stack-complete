@@ -8,4 +8,5 @@ export interface Comment {
     createdAt: Date;
     updatedAt: Date;
     postTitle: string;
+    topicTitle: string;
 }
