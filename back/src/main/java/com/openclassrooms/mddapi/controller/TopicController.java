@@ -47,7 +47,7 @@ public class TopicController {
 
     @PostMapping("/topics/subscribe")
     public ResponseEntity<TopicResponseDTO> subscribeToTopic(@RequestBody @Valid TopicResponseDTO topicResponseDTO) {
-        String subscribedTopic = topicService.saveSubScribe(topicResponseDTO.getId(), topicResponseDTO.getIsSubscribed());
+        topicService.saveSubScribe(topicResponseDTO.getId(), topicResponseDTO.getIsSubscribed());
         log.info("subscribed to topic requested");
         return ResponseEntity.ok(new TopicResponseDTO());
     }

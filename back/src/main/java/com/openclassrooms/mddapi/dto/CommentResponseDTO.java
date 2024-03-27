@@ -19,6 +19,7 @@ public class CommentResponseDTO {
     private String author;
     private Long postId;
     private String postTitle;
+    private String topicTitle;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -29,6 +30,7 @@ public class CommentResponseDTO {
         this.author = comment.getAuthor().getName();
         this.postId = getPostId();
         this.postTitle = comment.getPosts().getTitle();
+        this.topicTitle = comment.getPosts().getTopics().getTitle();
         this.createdAt = comment.getCreatedAt();
         this.updatedAt = comment.getUpdatedAt();
     }
