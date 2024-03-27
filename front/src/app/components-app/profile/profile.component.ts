@@ -22,6 +22,8 @@ import { TopicService } from 'src/app/services/topic.service';
     name = new FormControl('');
     subscribedTopic: Topics[] = [];
     topics!: Topics[];
+    topicId!: string;
+    userSubscribed!: boolean;
    
 
   
@@ -63,6 +65,11 @@ import { TopicService } from 'src/app/services/topic.service';
       this.getTopicsUserSubscribed().subscribe((topics) => {
         console.log(topics); // Add this line
         this.subscribedTopic = topics;
+
+        this.getTopicsUserSubscribed().subscribe((topics) => {
+          this.subscribedTopic = topics;
+
+        });
       });
     }
 
@@ -74,6 +81,23 @@ import { TopicService } from 'src/app/services/topic.service';
   
     
       });
+    }
+
+    subscribeToTopic() {
+      const body = {
+        topicId: this.topicId,
+        isSubscribed: false
+      };
+      //utilizza il metodo subscribeToTopic del servizio per iscriversi o annullare l'iscrizione a un argomento
+      if (this.userSubscribed) {
+        this.topicService.subscribeToTopic(body.topicId, body.isSubscribed).subscribe(() => {
+          this.userSubscribed = false; // Aggiorna lo stato di iscrizione dopo aver annullato l'iscrizione con successo
+        });
+      } else {
+        this.topicService.subscribeToTopic(body.topicId, true).subscribe(() => {
+          this.userSubscribed = true; // Aggiorna lo stato di iscrizione dopo aver sottoscritto con successo
+        });
+      }
     }
 
   

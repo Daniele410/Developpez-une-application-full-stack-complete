@@ -1,21 +1,22 @@
 <app-header-nav></app-header-nav>
 
+<div class="container">
+<button mat-icon-button (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <mat-card>
   <div class="title-container">
-    <button mat-icon-button (click)="goBack()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
     <h1>Create a new Topic</h1>
   </div>
 
-<mat-card>
   <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
     <label for="title">Title</label>
     <input type="text" formControlName="title" id="title">
     <div *ngIf="topicForm.get('title')?.invalid && topicForm.get('title')?.touched">
       <p style="color: red;">Title is required.</p>
     </div>
-   
+
     <label for="description">Description</label>
     <textarea formControlName="description" id="description"></textarea>
     <div *ngIf="topicForm.get('description')?.invalid && topicForm.get('description')?.touched">
@@ -25,18 +26,4 @@
     <button type="submit">Submit</button>
   </form>
 </mat-card>
-
-
-
-<!-- <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
-    <label for="title">Title</label>
-    <input type="text" formControlName="title" id="title">
-  
-    <label for="description">Description</label>
-    <textarea formControlName="description" id="description"></textarea>
-  
-    <label for="topics">Topics</label>
-    <input type="text" formControlName="topics" id="topics">
-  
-    <button type="submit">Submit </button>
-  </form> -->
+</div>

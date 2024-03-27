@@ -1,3 +1,12 @@
+.subscription-title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -23,13 +32,17 @@
 }
 
 
+
+
 .topics-container {
-  text-align: center;
-  border-top: 2px solid black;
-  padding-top: 10px;
-  margin-top: 10px;
-  padding-left: 5%;
-  padding-right: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-image: rgb(89, 92, 95);
+  margin-left: 50px;
+  margin-right: 50px;
+
+
 }
 
 .topic-card {
@@ -76,7 +89,7 @@ mat-card {
 }
 
 @media (max-width: 768px) {
-   .logout-button {
+  .logout-button {
     width: 100%;
   }
 
