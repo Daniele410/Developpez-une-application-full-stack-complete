@@ -52,18 +52,29 @@ public class TopicServiceImpl implements ITopicService {
 
     @Override
     public List<TopicResponseDTO> getAllTopics() {
-        List<Long> myTopicsId = getUserSubscribedTopics().stream().map(Topic::getId).toList();
+        List<Long> myTopicsId = getUserSubscribedTopicsPart().stream().map(Topic::getId).toList();
         List<TopicResponseDTO> allTopics = topicRepository.findAll().stream().map(TopicResponseDTO::new).toList();
         allTopics.forEach(topic -> topic.setIsSubscribed(myTopicsId.contains(topic.getId())));
         return allTopics;
     }
 
     @Override
-    public List<Topic> getUserSubscribedTopics() {
+    public List<Topic> getUserSubscribedTopicsPart() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
         List<Topic> topics = topicRepository.findAllTopicsByUsersId(user.getId());
+        return topics;
+    }
+
+    @Override
+    public List<TopicResponseDTO> getUserSubscribedTopics() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userService.getUserByEmail(userDetails.getUsername());
+        List<Long> myTopicsId = getUserSubscribedTopicsPart().stream().map(Topic::getId).toList();
+        List<TopicResponseDTO> topics = topicRepository.findAllTopicsByUsersId(user.getId()).stream().map(TopicResponseDTO::new).toList();
+        topics.forEach(topic -> topic.setIsSubscribed(myTopicsId.contains(topic.getId())));
         return topics;
     }
 
@@ -88,17 +99,15 @@ public class TopicServiceImpl implements ITopicService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
         Topic topic = this.topicRepository.findById(topicId).orElseThrow();
-        if (isSubscribed)
-            if (isUserSubscribed(topic)) {
-                log.info("User is already subscribed to the topic");
-                return "Topic already subscribed to";
-            }
+
         if (isSubscribed) {
             topic.getUsers().add(user);
             topicRepository.save(topic);
+            log.info("Subscribed to topic successfully");
             return "Subscribed to topic successfully";
         } else {
             unsubscribe(topicId);
+            log.info("Unsubscribed to topic successfully");
             return "Unsubscribed to topic successfully";
         }
     }

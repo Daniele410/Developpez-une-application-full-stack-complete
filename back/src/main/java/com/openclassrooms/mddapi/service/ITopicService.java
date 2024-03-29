@@ -13,7 +13,10 @@ public interface ITopicService {
 
     List<TopicResponseDTO> getAllTopics();
 
-    List<Topic> getUserSubscribedTopics();
+
+    List<Topic> getUserSubscribedTopicsPart();
+
+    List<TopicResponseDTO> getUserSubscribedTopics();
 
     Topic createTopic(TopicResponseDTO topicResponseDTO);
 

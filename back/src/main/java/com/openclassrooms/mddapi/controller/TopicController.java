@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @Slf4j
@@ -37,11 +36,8 @@ public class TopicController {
 
     @GetMapping("/topics/subscribe")
     public ResponseEntity<List<TopicResponseDTO>> retrieveUserSubscribedTopics() {
-        List<Topic> topics = topicService.getUserSubscribedTopics();
-        List<TopicResponseDTO> responseDTOs = topics.stream()
-                .map(TopicResponseDTO::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseDTOs);
+        List<TopicResponseDTO> topics = topicService.getUserSubscribedTopics();
+        return ResponseEntity.ok(topics);
     }
 
 

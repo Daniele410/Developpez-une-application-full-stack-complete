@@ -72,7 +72,7 @@ public class AuthenticationService {
     public UserResponseDTO me(String userEmail) throws ResourceNotFoundException {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + userEmail + " not found"));
-        List<Topic> topics = topicService.getUserSubscribedTopics();
+        List<Topic> topics = topicService.getUserSubscribedTopicsPart();
         UserResponseDTO response = new UserResponseDTO();
         response.setId(user.getId());
         response.setName(user.getName());
