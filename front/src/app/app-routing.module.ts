@@ -36,9 +36,9 @@ const routes: Routes = [
   canActivate: [AuthGuard], component: CreateTopicComponent },
   { path: 'profile',
   canActivate: [AuthGuard], component: ProfileComponent },
-
+  
   { path: '404', canActivate: [UnauthGuard], component: NotFoundComponent },
-
+  
   { path: '**', redirectTo: '404' }
 ];
 

@@ -30,12 +30,8 @@ export class LoginComponent  {
     const loginRequest = this.form.value as LoginRequest;
     this.authService.login(loginRequest).subscribe(
       (response: AuthSuccess) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me().subscribe((user: User) => {
-          this.sessionService.logIn(user);
-          this.router.navigate(['/users'])
-        });
-        this.router.navigate(['/users'])
+        sessionStorage.setItem('token', response.token);
+        this.router.navigate(['/topics'])
       },
       error => this.onError = true
     );
