@@ -12,29 +12,41 @@ import { Topics } from 'src/app/interfaces/topics.interface';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  
+  sortByNewestFirst: boolean = true;
+  posts: Post[] = [];
+  myTopics: Topics[] = [];
 
-
-  posts:Post[] = [];
-  myTopics:Topics[] = [];
-
-  constructor(private userSessionService:UserSessionService, private postService: PostService, private router: Router) { }
+  constructor(private userSessionService: UserSessionService, private postService: PostService, private router: Router) { }
 
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe((res) => { this.posts = res; });
-  
+
   }
 
-  
+
 
   goToDetail(post: Post) {
 
     this.router.navigate(['/posts', post.id]);
 
 
-    }
+  }
 
-    
+  sortByDate() {
+    if (this.sortByNewestFirst) {
+        this.posts.sort((a, b) => {
+            return <any>new Date(b.createdAt) - <any>new Date(a.createdAt);
+        });
+    } else {
+        this.posts.sort((a, b) => {
+            return <any>new Date(a.createdAt) - <any>new Date(b.createdAt);
+        });
+    }
+    // Inverti il valore di sortByNewestFirst a ogni chiamata
+    this.sortByNewestFirst = !this.sortByNewestFirst;
+}
+
+
 
 }

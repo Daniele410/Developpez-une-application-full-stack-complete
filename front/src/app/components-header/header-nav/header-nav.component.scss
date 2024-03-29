@@ -4,6 +4,10 @@ mat-toolbar {
   border-bottom: 1px solid black;
 }
 
+.active-link {
+  color: blue;
+}
+
 img {
   max-width: 20%;
   height: auto;
@@ -17,8 +21,19 @@ img {
   display: flex;
 }
 
+.mobil-menu {
+  display: none;
+}
+
+.menuOpen {
+  display: none;
+}
+
+
+
+
 @media (max-width: 768px) {
-  .right button:not(.mobile-nav) {
+  .right button:not(.mobile-nav):not(.menuOpen) {
     display: none;
   }
 
@@ -26,12 +41,27 @@ img {
     display: block;
   }
 
-  .dropdown-menu {
-    display: block !important; /* Assicurati che il menu a tendina sia visibile */
-}
+  .menuOpen {
+    display: block;
+  }
 
-img {
-  max-width: 100px;
-  min-width: 100px; /* Sostituisci 100px con la larghezza desiderata */
-}
+  .mobil-menu {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    height: 100%;
+    width: 30%;
+    right: 0px;
+    position: absolute;
+    background-color: white;
+    
+  }
+  a {
+    text-decoration: none;
+  } 
+
+  img {
+    max-width: 100px;
+    min-width: 100px;
+  }
 }

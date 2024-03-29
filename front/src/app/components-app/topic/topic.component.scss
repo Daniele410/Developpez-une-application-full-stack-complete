@@ -4,14 +4,43 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  
-  .topic-card {
-    flex: 0 0 48%; // Questo farà in modo che ogni card occupi circa il 48% della larghezza del contenitore, permettendo di visualizzare 2 card per linea
-  }
 
   .new-topic{
     display: flex;
-    justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
+  
+  .topic-card {
+    flex: 0 0 48%; 
+  }
+  @media (min-width: 768px) {
+    .new-topic {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .new-topic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+  .sortBy {
+      background: none;
+      border: none;
+      outline: none;
+  }
+
+}
