@@ -3,17 +3,21 @@
         <img src="/assets/logo_p6.png" alt="logo" />
     </div>
     <div class="right">
-        <button mat-button routerLink="/posts">Post</button>
-        <button mat-button routerLink="/topics">Topics</button>
-        <button mat-icon-button routerLink="/profile">
+        <button mat-button routerLink="/posts" routerLinkActive="active-link">Post</button>
+        <button mat-button routerLink="/topics" routerLinkActive="active-link">Topics</button>
+        <button mat-icon-button routerLink="/profile" routerLinkActive="active-link">
             <mat-icon>account_circle</mat-icon>
         </button>
-        <select class="dropdown-menu" style="display: none;" (change)="onSelectChange($event)">
-            <option>menu</option>
-            <option value="/profile">Profile</option>
-            <option value="/posts">Post</option>
-            <option value="/topics">Topics</option>
-        </select>
+
+        <button class="menuOpen" mat-icon-button (click)="menuOpen = !menuOpen ">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <aside class="mobil-menu" (blur)="menuOpen = false" *ngIf="menuOpen" (document:click)="onDocumentClick($event)"
+            (change)="onSelectChange($event)">
+            <a routerLink="/profile" routerLinkActive="active-link">Profile</a>
+            <a routerLink="/posts" routerLinkActive="active-link">Post</a>
+            <a routerLink="/topics" routerLinkActive="active-link">Topics</a>
+        </aside>
     </div>
 </mat-toolbar>
-

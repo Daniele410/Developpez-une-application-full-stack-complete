@@ -25,14 +25,14 @@
 <h2 class="subscription-title">Subscription</h2>
 <div class="topics-container">
 
-  <div class="topic-card" *ngFor="let topic of subscribedTopic">
+  <div class="topic-card" *ngFor="let topic of subscribedTopics">
     <mat-card>
       <mat-card-title>{{ topic.title }}</mat-card-title>
       <br>
       <p class="description"> Description : {{ topic.description }}</p>
       <div class="button-container">
         <button mat-flat-button color="primary" mat-button (click)="toggleSubscription(topic)">
-          {{ topic.isSubscribed ? 'Subscribe' : 'Unsubscribe' }}
+          {{ topic.isSubscribed ? 'Unsubscribe' : 'Subscribe' }}
         </button>
       </div>
     </mat-card>

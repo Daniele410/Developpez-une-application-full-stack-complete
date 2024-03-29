@@ -18,10 +18,8 @@ export class TopicsCardComponent implements OnInit, OnDestroy {
   topicId!: string;
   userSubscribed!: boolean;
   subscribedTopics: Topics[] = [];
-
-
-
-
+  
+  
   private destroy$: Subscription = new Subscription();
   constructor(
     private topicsService: TopicsService,
@@ -34,10 +32,9 @@ export class TopicsCardComponent implements OnInit, OnDestroy {
     this.topicsService.getTopics().subscribe((res) => {
       this.topics = res;
 
-       this.getTopicsUserSubscribed().subscribe((topics) => {
+      this.getTopicsUserSubscribed().subscribe((topics) => {
         this.subscribedTopics = topics;
       });
-
     });
   }
 
@@ -49,7 +46,7 @@ export class TopicsCardComponent implements OnInit, OnDestroy {
       console.log(`Unsubscribed from topic ${topic.title}`);
       topic.isSubscribed = !topic.isSubscribed;
 
-  
+
     });
   }
 
@@ -59,22 +56,7 @@ export class TopicsCardComponent implements OnInit, OnDestroy {
 
 
 
-  subscribeToTopic() {
-    const body = {
-      topicId: this.topicId,
-      isSubscribed: false
-    };
-    //utilizza il metodo subscribeToTopic del servizio per iscriversi o annullare l'iscrizione a un argomento
-    if (this.userSubscribed) {
-      this.topicService.subscribeToTopic(body.topicId, body.isSubscribed).subscribe(() => {
-        this.userSubscribed = false; // Aggiorna lo stato di iscrizione dopo aver annullato l'iscrizione con successo
-      });
-    } else {
-      this.topicService.subscribeToTopic(body.topicId, true).subscribe(() => {
-        this.userSubscribed = true; // Aggiorna lo stato di iscrizione dopo aver sottoscritto con successo
-      });
-    }
-  }
+ 
 
   ngOnDestroy(): void {
     this.destroy$.unsubscribe();
