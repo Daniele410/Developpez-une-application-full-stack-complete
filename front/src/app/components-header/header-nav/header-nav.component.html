@@ -15,9 +15,9 @@
 
         <aside class="mobil-menu" (blur)="menuOpen = false" *ngIf="menuOpen" (document:click)="onDocumentClick($event)"
             (change)="onSelectChange($event)">
-            <a routerLink="/profile" routerLinkActive="active-link">Profile</a>
+            <a routerLink="/topics" routerLinkActive="active-link">Topics</a>
             <a routerLink="/posts" routerLinkActive="active-link">Post</a>
-            <a class="iconProfil" routerLink="/topics" routerLinkActive="active-link"><mat-icon>account_circle</mat-icon></a>
+            <a class="iconProfil" routerLink="/profile" routerLinkActive="active-link"><mat-icon>account_circle</mat-icon></a>
         </aside>
     </div>
 </mat-toolbar>
