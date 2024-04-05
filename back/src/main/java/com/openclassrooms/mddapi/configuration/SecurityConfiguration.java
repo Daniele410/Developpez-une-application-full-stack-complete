@@ -13,6 +13,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+/**
+ * SecurityConfiguration is a configuration class that sets up the security settings for the application.
+ * It configures the CORS settings, the session management policy, and the authentication provider.
+ * It also sets up the security filter chain and adds the JwtAuthenticationFilter to it.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -21,6 +26,15 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
 
+    /**
+     * Configures and returns the security filter chain for the application.
+     * It sets up the CORS settings, the session management policy, and the authentication provider.
+     * It also adds the JwtAuthenticationFilter to the security filter chain.
+     *
+     * @param http the HttpSecurity instance to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during the configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CorsConfigurationSource source = request -> {

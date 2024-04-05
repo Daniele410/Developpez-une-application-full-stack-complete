@@ -6,7 +6,22 @@ import org.passay.*;
 
 import java.util.Arrays;
 
+/**
+ * PasswordConstraintsValidator is a class that validates password constraints.
+ * It implements the ConstraintValidator interface and overrides the isValid method.
+ * It uses the Passay library to validate the password according to the specified rules.
+ */
 public class PasswordConstraintsValidator implements ConstraintValidator<Password, String> {
+
+    /**
+     * Checks if the given password is valid according to the specified rules.
+     * The rules are: minimum length of 6, maximum length of 60, at least one uppercase letter,
+     * at least one digit, at least one special character, and no whitespace.
+     *
+     * @param password                   the password to be validated
+     * @param constraintValidatorContext the context in which the constraint is defined
+     * @return true if the password is valid, false otherwise
+     */
     @Override
     public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
 

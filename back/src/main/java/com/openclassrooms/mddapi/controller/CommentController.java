@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * CommentController is a REST controller that handles HTTP requests related to comments.
+ * It uses ICommentService to perform operations on comments.
+ */
 @CrossOrigin(origins = "*")
 @Slf4j
 @RequiredArgsConstructor
@@ -22,6 +26,11 @@ public class CommentController {
 
     private final ICommentService commentService;
 
+    /**
+     * Retrieves all comments.
+     *
+     * @return a ResponseEntity containing a list of CommentResponseDTOs
+     */
     @GetMapping("/comments")
     public ResponseEntity<List<CommentResponseDTO>> retrieveAllComments() {
         List<Comment> comments = commentService.getAllComments();
@@ -32,6 +41,12 @@ public class CommentController {
         return ResponseEntity.ok(responseDTOs);
     }
 
+    /**
+     * Retrieves comments by post ID.
+     *
+     * @param postId the ID of the post
+     * @return a ResponseEntity containing a list of CommentResponseDTOs
+     */
     @GetMapping("/comments/{postId}")
     public ResponseEntity<List<CommentResponseDTO>> retrieveCommentsByPostId(@PathVariable Long postId) {
         Optional<List<Comment>> comments = commentService.getCommentsByPostId(postId);
@@ -42,6 +57,12 @@ public class CommentController {
         return ResponseEntity.ok(responseDTOs);
     }
 
+    /**
+     * Saves a comment.
+     *
+     * @param comment a CommentResponseDTO containing the comment data
+     * @return a ResponseEntity containing the saved Comment
+     */
     @PostMapping("/comment")
     public ResponseEntity<Comment> saveComment(@RequestBody @Valid CommentResponseDTO comment) {
         Comment savedComment = commentService.saveComment(comment);

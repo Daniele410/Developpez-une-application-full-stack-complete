@@ -18,6 +18,10 @@ import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.OK;
 
+/**
+ * UserController is a REST controller that handles HTTP requests related to users.
+ * It uses IUserService and AuthenticationService to perform operations on users.
+ */
 @CrossOrigin(origins = "*")
 @Slf4j
 @RequiredArgsConstructor
@@ -28,6 +32,12 @@ public class UserController {
     private final IUserService userService;
     private final AuthenticationService authenticationService;
 
+    /**
+     * Retrieves the authenticated user.
+     *
+     * @return a ResponseEntity containing the UserResponseDTO of the authenticated user
+     * @throws ResourceNotFoundException if the authenticated user is not found
+     */
     @GetMapping("/auth/me")
     public ResponseEntity<UserResponseDTO> me() throws ResourceNotFoundException {
 
@@ -39,6 +49,13 @@ public class UserController {
         return new ResponseEntity<>(responseDTO, OK);
     }
 
+    /**
+     * Retrieves a user by its ID.
+     *
+     * @param id the ID of the user
+     * @return a ResponseEntity containing the UserResponseDTO
+     * @throws UserNotFoundException if the user is not found
+     */
     @GetMapping("/user/{id}")
     public ResponseEntity<UserResponseDTO> retrieveUserById(@PathVariable Long id) throws UserNotFoundException {
         Optional<User> user = Optional.ofNullable(userService.getUserById(id));
@@ -51,6 +68,8 @@ public class UserController {
     }
 
     /**
+     * Modifies a user.
+     *
      * @param modifiedUser the user modified email and name
      * @return response entity with the modified user
      */

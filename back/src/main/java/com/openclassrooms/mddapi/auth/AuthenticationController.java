@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.auth;
 
-
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -16,6 +15,10 @@ import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.OK;
 
+/**
+ * AuthenticationController is a REST controller that handles authentication requests.
+ * It provides endpoints for user registration and login.
+ */
 @CrossOrigin(origins = "*")
 @Slf4j
 @RestController
@@ -26,6 +29,9 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserRepository userRepository;
 
+    /**
+     * Handles the registration of a new user.
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request) throws Exception {
 
@@ -42,7 +48,12 @@ public class AuthenticationController {
         return new ResponseEntity<>(authenticationService.register(request), OK);
     }
 
-
+    /**
+     * Handles the login of a user.
+     *
+     * @param request the login request containing the user's email and password
+     * @return a ResponseEntity indicating the success or failure of the operation
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         Optional<User> userEmail = userRepository.findByEmail(request.getEmail());

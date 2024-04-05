@@ -18,6 +18,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * CommentServiceImpl is a service class that implements ICommentService.
+ * It provides methods to interact with the CommentRepository and perform operations on Comment entities.
+ */
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,12 +37,24 @@ public class CommentServiceImpl implements ICommentService {
     @Autowired
     private IUserService userService;
 
+    /**
+     * Retrieves a Comment entity by its id.
+     *
+     * @param id the id of the Comment entity to retrieve
+     * @return the Comment entity with the specified id
+     */
     @Override
     public Comment getCommentById(Long id) {
         log.info("get comment by id");
         return commentRepository.findById(id).get();
     }
 
+    /**
+     * Retrieves all Comment entities associated with a specific Post entity.
+     *
+     * @param postId the id of the Post entity
+     * @return a list of Comment entities associated with the Post entity
+     */
     @Override
     public Optional<List<Comment>> getCommentsByPostId(Long postId) {
 
@@ -50,12 +66,23 @@ public class CommentServiceImpl implements ICommentService {
         return commentRepository.findByPostsId(postId);
     }
 
+    /**
+     * Retrieves all Comment entities.
+     *
+     * @return a list of all Comment entities
+     */
     @Override
     public List<Comment> getAllComments() {
         log.info("get all comments");
         return commentRepository.findAll();
     }
 
+    /**
+     * Creates a new Comment entity from a CommentResponseDTO and saves it in the repository.
+     *
+     * @param commentDto the CommentResponseDTO containing the data to create the Comment entity with
+     * @return the created Comment entity
+     */
     @Override
     public Comment saveComment(CommentResponseDTO commentDto) {
         log.info("save comment");
@@ -74,6 +101,12 @@ public class CommentServiceImpl implements ICommentService {
         return comment;
     }
 
+    /**
+     * Deletes a Comment entity if the current user is the author of the comment.
+     *
+     * @param id the id of the Comment entity to delete
+     * @return a message indicating the success or failure of the operation
+     */
     @Override
     public String deleteComment(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -83,7 +116,7 @@ public class CommentServiceImpl implements ICommentService {
         if (comment.getAuthor().getId() == user.getId()) {
             commentRepository.deleteById(id);
             log.info("Comment deleted successfully");
-            return "Comment whit id " + id + " deleted successfully";
+            return "Comment with id " + id + " deleted successfully";
         } else {
             log.error("User is not the author of the comment");
             return "This User is not the author of the comment";

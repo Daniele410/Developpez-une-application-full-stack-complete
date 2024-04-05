@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * UserResponseDTO is a data transfer object that represents a User.
+ * It is used to transfer data between different parts of the application.
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -25,6 +29,11 @@ public class UserResponseDTO {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
+    /**
+     * Constructs a UserResponseDTO from a User.
+     *
+     * @param user the User to be converted into a UserResponseDTO
+     */
     public UserResponseDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();

@@ -21,11 +21,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * AuthenticationService is a service class that handles authentication requests.
+ * It provides methods for user registration and authentication.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-
 
     private final UserRepository userRepository;
     private final ITopicService topicService;
@@ -33,6 +36,10 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * AuthenticationService is a service class that handles authentication requests.
+     * It provides methods for user registration and authentication.
+     */
     public AuthenticationResponse register(RegisterRequest request) throws Exception {
         var user = User.builder()
                 .name(request.getName())
@@ -55,6 +62,12 @@ public class AuthenticationService {
         }
     }
 
+    /**
+     * Authenticates a user.
+     *
+     * @param request the authentication request containing the user's email and password
+     * @return an AuthenticationResponse containing the JWT token for the authenticated user
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -69,6 +82,13 @@ public class AuthenticationService {
                 .build();
     }
 
+    /**
+     * Retrieves the details of the currently authenticated user.
+     *
+     * @param userEmail the email of the authenticated user
+     * @return a UserResponseDTO containing the details of the authenticated user
+     * @throws ResourceNotFoundException if a user with the specified email could not be found
+     */
     public UserResponseDTO me(String userEmail) throws ResourceNotFoundException {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + userEmail + " not found"));
@@ -84,6 +104,11 @@ public class AuthenticationService {
         return response;
     }
 
+    /**
+     * Retrieves the email of the currently authenticated user.
+     *
+     * @return the email of the currently authenticated user, or null if no user is authenticated
+     */
     public String getAuthenticatedUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
