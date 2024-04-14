@@ -21,6 +21,7 @@ export class RegisterComponent {
     name: ['', [Validators.required, Validators.min(3)]],
     password: ['', [Validators.required, Validators.min(3)]]
   });
+hide: any;
 
   constructor(private authService: AuthService,
     private fb: FormBuilder,
