@@ -1,11 +1,11 @@
 
 <div style="text-align: center">
-<img src="front/src/assets/logo_p6.png" alt="ORION Logo" width="400"/>
+<img src="front/src/assets/logo_p6.png" alt="ORION Logo" width="400px"/>
 </div>
 
 # ORION - MDD (Monde de Dév)
 
-Welcome to ORION, a software development company dedicated to creating innovative solutions. We are excited to introduce MDD (Monde de Dév), the next-generation social network tailored for developers.
+Welcome to ORION, a software development company dedicated to create innovative solutions. We are excited to introduce MDD (Monde de Dév), the next-generation social network tailored for developers.
 
 ## About MDD
 
@@ -22,7 +22,7 @@ This repository contains both the front-end and back-end components of a full-st
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3. Utilizes Angular Material for UI components.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3. It uses Angular Material for UI components.
 
 ### Back-End
 
